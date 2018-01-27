@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^ItemClickIndexBlock)(NSInteger index);
+
 @interface XYMenu : NSObject
 
-+ (void)showMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles onView:(UIView *)view;
++ (void)showMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles inView:(UIView *)view withItemClickIndex:(ItemClickIndexBlock)block;
 
 + (void)dismissMenu;
-
 
 @end

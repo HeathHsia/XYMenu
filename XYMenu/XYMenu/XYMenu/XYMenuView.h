@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XYMenuView : UIView
+typedef void(^ItemClickBlock)(NSInteger index);
 
-- (void)setImagesArr:(NSArray *)imagesArr titles:(NSArray *)titles;
+@interface XYMenuView : UIView
+- (void)setImagesArr:(NSArray *)imagesArr titles:(NSArray *)titles withRect:(CGRect)rect withItemClickBlock:(ItemClickBlock)block;
+
+- (void)showContentView;
+
+- (void)hideContentView;
 
 @end

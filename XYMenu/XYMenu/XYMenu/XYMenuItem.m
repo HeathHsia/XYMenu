@@ -23,6 +23,7 @@
 - (instancetype)initWithFrame:(CGRect)frame withIconName:(NSString *)iconName title:(NSString *)title
 {
     if (self = [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor clearColor];
         _iconName = iconName;
         _title = title;
         [self setUpViews];
@@ -32,15 +33,13 @@
 
 - (void)setUpViews
 {
-//    CGFloat kItemWidth = self.bounds.size.width;
     CGFloat kItemHeight = self.bounds.size.height;
     CGFloat iconHeight = kItemHeight / 3;
     [self addSubview:self.iconImage];
-    self.iconImage.frame = CGRectMake(iconHeight, iconHeight, iconHeight, iconHeight);
     [self addSubview:self.titleLab];
+    self.iconImage.frame = CGRectMake(iconHeight, iconHeight, iconHeight, iconHeight);
     CGFloat iconMaxY = CGRectGetMaxY(self.iconImage.frame);
     self.titleLab.frame = CGRectMake(iconMaxY + (iconHeight * 3 / 4), iconHeight, iconHeight * 3, iconHeight);
-    [self addSubview:self.titleLab];
 }
 
 - (UIImageView *)iconImage
@@ -57,9 +56,8 @@
         _titleLab = [[UILabel alloc] init];
         _titleLab.textColor = [UIColor whiteColor];
         _titleLab.text = _title;
-        _titleLab.font = [UIFont systemFontOfSize:15.0];
+        _titleLab.font = [UIFont systemFontOfSize:16.0];
         _titleLab.backgroundColor = [UIColor clearColor];
-        
     }
     return _titleLab;
 }

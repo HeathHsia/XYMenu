@@ -12,5 +12,4 @@
 
 - (instancetype)initWithFrame:(CGRect)frame withIconName:(NSString *)iconName title:(NSString *)title;
 
-
 @end
