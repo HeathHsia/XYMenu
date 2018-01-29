@@ -11,6 +11,8 @@
 		149B7835201C5BB80014D37A /* XYMenuBackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 149B782F201C5BB80014D37A /* XYMenuBackView.m */; };
 		149B7836201C5BB80014D37A /* XYMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 149B7831201C5BB80014D37A /* XYMenuItem.m */; };
 		149B7837201C5BB80014D37A /* XYMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 149B7833201C5BB80014D37A /* XYMenuView.m */; };
+		149B783D201C80960014D37A /* XYTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 149B783C201C80960014D37A /* XYTableViewController.m */; };
+		149B7840201F26430014D37A /* UIBarButtonItem+XYMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 149B783F201F26430014D37A /* UIBarButtonItem+XYMenu.m */; };
 		14E6DDA0201098A400995B6D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E6DD9F201098A400995B6D /* AppDelegate.m */; };
 		14E6DDA3201098A400995B6D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E6DDA2201098A400995B6D /* ViewController.m */; };
 		14E6DDA6201098A400995B6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14E6DDA4201098A400995B6D /* Main.storyboard */; };
@@ -47,6 +49,10 @@
 		149B7831201C5BB80014D37A /* XYMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMenuItem.m; sourceTree = "<group>"; };
 		149B7832201C5BB80014D37A /* XYMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMenuView.h; sourceTree = "<group>"; };
 		149B7833201C5BB80014D37A /* XYMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMenuView.m; sourceTree = "<group>"; };
+		149B783B201C80960014D37A /* XYTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYTableViewController.h; sourceTree = "<group>"; };
+		149B783C201C80960014D37A /* XYTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYTableViewController.m; sourceTree = "<group>"; };
+		149B783E201F26430014D37A /* UIBarButtonItem+XYMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+XYMenu.h"; sourceTree = "<group>"; };
+		149B783F201F26430014D37A /* UIBarButtonItem+XYMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+XYMenu.m"; sourceTree = "<group>"; };
 		14E6DD9B201098A400995B6D /* XYMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XYMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14E6DD9E201098A400995B6D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		14E6DD9F201098A400995B6D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -101,6 +107,8 @@
 				149B7831201C5BB80014D37A /* XYMenuItem.m */,
 				149B7832201C5BB80014D37A /* XYMenuView.h */,
 				149B7833201C5BB80014D37A /* XYMenuView.m */,
+				149B783E201F26430014D37A /* UIBarButtonItem+XYMenu.h */,
+				149B783F201F26430014D37A /* UIBarButtonItem+XYMenu.m */,
 			);
 			path = XYMenu;
 			sourceTree = "<group>";
@@ -133,6 +141,8 @@
 				14E6DD9F201098A400995B6D /* AppDelegate.m */,
 				14E6DDA1201098A400995B6D /* ViewController.h */,
 				14E6DDA2201098A400995B6D /* ViewController.m */,
+				149B783B201C80960014D37A /* XYTableViewController.h */,
+				149B783C201C80960014D37A /* XYTableViewController.m */,
 				14E6DDA4201098A400995B6D /* Main.storyboard */,
 				14E6DDA7201098A400995B6D /* Assets.xcassets */,
 				14E6DDA9201098A400995B6D /* LaunchScreen.storyboard */,
@@ -294,7 +304,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				14E6DDA3201098A400995B6D /* ViewController.m in Sources */,
+				149B7840201F26430014D37A /* UIBarButtonItem+XYMenu.m in Sources */,
 				149B7834201C5BB80014D37A /* XYMenu.m in Sources */,
+				149B783D201C80960014D37A /* XYTableViewController.m in Sources */,
 				149B7837201C5BB80014D37A /* XYMenuView.m in Sources */,
 				149B7836201C5BB80014D37A /* XYMenuItem.m in Sources */,
 				14E6DDAE201098A400995B6D /* main.m in Sources */,

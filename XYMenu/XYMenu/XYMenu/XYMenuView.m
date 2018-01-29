@@ -14,7 +14,6 @@
 
 #define kItemBtnTag 1001
 
-
 static const CGFloat kTriangleLength = 16;
 static const CGFloat kTriangleHeight = 10;
 
@@ -96,14 +95,12 @@ static const CGFloat kTriangleHeight = 10;
 {
     self.contentView.hidden = NO;
     self.contentView.frame = self.bounds;
-    
 }
 
 - (void)hideContentView
 {
     self.contentView.hidden = YES;
 }
-
 
 #pragma mark --- 创建Items
 - (void)setMenuItemsWithRect:(CGRect)rect
@@ -156,10 +153,13 @@ static const CGFloat kTriangleHeight = 10;
 {
     if (!_contentView) {
         _contentView = [[UIView alloc] init];
+        _contentView.userInteractionEnabled = YES;
         _contentView.backgroundColor = [UIColor clearColor];
     }
     return _contentView;
 }
+
+
 
 
 

@@ -51,45 +51,149 @@
                 <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="26U-Jg-wWj">
-                                <rect key="frame" x="301" y="137" width="39" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" priority="1" constant="80" id="LnK-H3-yMc"/>
-                                    <constraint firstAttribute="height" constant="30" id="UmY-4A-GWp"/>
-                                </constraints>
-                                <state key="normal" title="Menu"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fMB-le-ihu">
+                                <rect key="frame" x="20" y="123" width="69" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Left"/>
+                                <connections>
+                                    <action selector="alertLeftMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zAS-yU-d1m"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F0c-dr-4bs">
+                                <rect key="frame" x="182" y="123" width="50" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Mid"/>
+                                <connections>
+                                    <action selector="alertMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Swu-fm-YCb"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yyq-fq-qKc">
+                                <rect key="frame" x="20" y="353" width="69" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Left"/>
+                                <connections>
+                                    <action selector="alertLeftMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3PF-5N-9jT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hs-9j-5CH">
+                                <rect key="frame" x="20" y="579" width="69" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <state key="normal" title="Left"/>
+                                <connections>
+                                    <action selector="alertLeftMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OSD-zk-4Up"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="66v-9H-kKE">
+                                <rect key="frame" x="184" y="353" width="47" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Mid"/>
+                                <connections>
+                                    <action selector="alertMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sTD-4O-WIF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahV-VC-nMD">
+                                <rect key="frame" x="341" y="353" width="53" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Right"/>
+                                <connections>
+                                    <action selector="alertMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="abQ-JH-gE2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D2w-ed-c7T">
+                                <rect key="frame" x="177" y="579" width="61" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <state key="normal" title="Mid"/>
+                                <connections>
+                                    <action selector="alertMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fm9-a9-xie"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fma-Pb-WOK">
+                                <rect key="frame" x="341" y="579" width="53" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <state key="normal" title="Right"/>
+                                <connections>
+                                    <action selector="alertMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yzu-by-md7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="26U-Jg-wWj">
+                                <rect key="frame" x="341" y="123" width="53" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Right"/>
                                 <connections>
                                     <action selector="alertMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iPE-TB-E87"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="26U-Jg-wWj" secondAttribute="trailing" constant="74" id="MMG-Au-A8w"/>
-                            <constraint firstItem="26U-Jg-wWj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="fLH-8d-Frq"/>
-                            <constraint firstItem="26U-Jg-wWj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="73" id="gBK-iI-8S0"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="vI2-hE-vjl"/>
+                    <navigationItem key="navigationItem" id="vI2-hE-vjl">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" title="Left" id="pE2-ua-iFM">
+                            <connections>
+                                <action selector="leftBarItem:" destination="BYZ-38-t0r" id="ThJ-ji-M76"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Right" id="Ysn-B8-Ltw">
+                            <connections>
+                                <action selector="rigthtBarItem:" destination="BYZ-38-t0r" id="8v4-dQ-d0K"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="clickButton" destination="26U-Jg-wWj" id="PLd-OU-v0e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-210" y="-47"/>
+            <point key="canvasLocation" x="-210.1449275362319" y="-47.282608695652179"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="8Xc-4d-AGV">
             <objects>
-                <tableViewController id="reD-8I-ASP" sceneMemberID="viewController">
+                <tableViewController id="reD-8I-ASP" customClass="XYTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="3tp-mc-K7g">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="XYCell" id="tP1-uL-jvY">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tP1-uL-jvY" id="wNx-cZ-15s">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cug-8x-S89">
+                                            <rect key="frame" x="41" y="6" width="30" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Left"/>
+                                            <connections>
+                                                <action selector="leftCellMenu:" destination="reD-8I-ASP" eventType="touchUpInside" id="zTh-Ul-p6Y"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1AC-Kv-yRt">
+                                            <rect key="frame" x="339" y="6" width="36" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Right"/>
+                                            <connections>
+                                                <action selector="rightCellMenu:" destination="reD-8I-ASP" eventType="touchUpInside" id="T1j-69-cGY"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7v-C9-tpb">
+                                            <rect key="frame" x="192" y="6" width="30" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Mid"/>
+                                            <connections>
+                                                <action selector="midCellMenu:" destination="reD-8I-ASP" eventType="touchUpInside" id="K50-08-qzM"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="reD-8I-ASP" id="ut2-aN-WtH"/>
                             <outlet property="delegate" destination="reD-8I-ASP" id="Ad7-IU-VDX"/>

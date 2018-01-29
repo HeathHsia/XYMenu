@@ -9,16 +9,41 @@
 #import "XYMenuBackView.h"
 #import "XYMenu.h"
 
+@interface XYMenuBackView () <UIGestureRecognizerDelegate>
+
+@end
+
 @implementation XYMenuBackView
 
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+- (instancetype)init
 {
-    UITouch *touch = [touches anyObject];
-    UIView *view = touch.view;
-    if ([view isKindOfClass:[self class]]) {
-         [XYMenu dismissMenu];
+    if (self = [super init]) {
+        // 添加pan手势, 防止视图响应scrollview的滚动手势
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
+        pan.delegate = self;
+        [self addGestureRecognizer:pan];
+    }
+    return self;
+}
+
+- (void)panAction:(UIPanGestureRecognizer *)pan
+{
+    if ([pan.view isEqual:self]) {
+        return ;
     }
 }
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    
+    if (![XYMenu isInMenuViewWithPoint:point]) {
+        [XYMenu dismissMenu];
+    }
+    
+    return [super hitTest:point withEvent:event];
+    
+}
+
+
 
 @end
