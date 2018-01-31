@@ -23,6 +23,7 @@ static const CGFloat kTriangleHeight = 10;
 @property (nonatomic, strong) NSArray *imagesArr;
 @property (nonatomic, strong) NSArray *titlesArr;
 @property (nonatomic, copy) ItemClickBlock itemClickBlock;
+@property (nonatomic, assign) XYMenuType menuType;
 
 @end
 
@@ -44,14 +45,16 @@ static const CGFloat kTriangleHeight = 10;
     return self;
 }
 
-- (void)setImagesArr:(NSArray *)imagesArr titles:(NSArray *)titles withRect:(CGRect)rect withItemClickBlock:(ItemClickBlock)block
+- (void)setImagesArr:(NSArray *)imagesArr titles:(NSArray *)titles withRect:(CGRect)rect withMenuType:(XYMenuType)menuType withItemClickBlock:(ItemClickBlock)block
 {
+    _menuType = menuType;
     _imagesArr = [NSArray arrayWithArray:imagesArr];
     _titlesArr = [NSArray arrayWithArray:titles];
     [self setMenuItemsWithRect:(CGRect)rect];
     if (block) {
         _itemClickBlock = block;
     }
+    [self setNeedsDisplay];
 }
 
 - (instancetype)init
@@ -66,15 +69,34 @@ static const CGFloat kTriangleHeight = 10;
 
 - (void)drawRect:(CGRect)rect
 {
+    
     CGFloat kContentWidth = self.bounds.size.width;
-//    CGFloat kContentHeight = self.bounds.size.height;
+    //    CGFloat kContentHeight = self.bounds.size.height;
     CGFloat kContentMidX = CGRectGetMidX(self.bounds);
-    CGFloat triangleX = kContentMidX + (kContentWidth / 4) - (kTriangleLength / 2);
+    CGFloat triangleX;
     
     UIBezierPath *trianglePath = [UIBezierPath bezierPath];
+    switch (_menuType) {
+        case XYMenuLeftNavBar:
+        {
+            triangleX = kContentWidth / 4;
+        }
+            break;
+        case XYMenuRightNavBar:
+        {
+            triangleX = kContentMidX + (kContentWidth /4) - (kTriangleLength / 2);
+        }
+            break;
+            
+        default:
+            triangleX = kContentMidX;
+            break;
+    }
     [trianglePath moveToPoint:CGPointMake(triangleX, kTriangleHeight)];
     [trianglePath addLineToPoint:CGPointMake(triangleX + (kTriangleLength / 2), 0)];
     [trianglePath addLineToPoint:CGPointMake(triangleX + kTriangleLength, kTriangleHeight)];
+    
+    
     [kXYMenuContentBackColor set];
     [trianglePath fill];
     

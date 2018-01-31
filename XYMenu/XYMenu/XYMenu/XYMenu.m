@@ -31,6 +31,7 @@ static  XYMenu *menu;
 
 @implementation XYMenu
 
+// 还是需要一个全局的静态变量
 + (instancetype)shareMenu
 {
     static dispatch_once_t onceToken;
@@ -56,9 +57,9 @@ static  XYMenu *menu;
     [[self shareMenu] showMenuWithImages:imagesArr titles:titles inView:view menuType:menuType withItemClickIndex:block];
 }
 
-+ (void)showMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles inBarButtonItem:(UIBarButtonItem *)barButtonItem menuType:(XYMenuType)menuType withItemClickIndex:(ItemClickIndexBlock)block
++ (void)showMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles menuType:(XYMenuType)menuType currentNavVC:(UINavigationController *)currentNavVC withItemClickIndex:(ItemClickIndexBlock)block
 {
-    [[self shareMenu] showMenuWithImages:imagesArr titles:titles inBarButtonItem:barButtonItem menuType:menuType withItemClickIndex:block];
+    [[self shareMenu] showMenuWithImages:imagesArr titles:titles menuType:menuType currentNavVC:currentNavVC withItemClickIndex:block];
 }
 
 #pragma mark --- 隐藏菜单
@@ -82,8 +83,43 @@ static  XYMenu *menu;
     }];
 }
 
-- (void)showMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles inBarButtonItem:(UIBarButtonItem *)barButtonItem menuType:(XYMenuType)menuType withItemClickIndex:(ItemClickIndexBlock)block
+- (void)showMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles menuType:(XYMenuType)menuType currentNavVC:(UINavigationController *)currentNavVC  withItemClickIndex:(ItemClickIndexBlock)block
 {
+    CGFloat XYMenuHeight = XYMenuItemHeight * titles.count;
+    switch (menuType) {
+        case XYMenuLeftNavBar:
+        {
+            // 左侧NaviBar
+            self.menuInitRect = CGRectMake(10 + (XYMenuWidth / 4), 64, 1, 1);
+            self.menuResultRect = CGRectMake(10, 64, XYMenuWidth, XYMenuHeight);
+        }
+            break;
+        case XYMenuRightNavBar:
+        {
+            // 右侧NaviBar
+            self.menuInitRect = CGRectMake(kXYMenuScreenWidth - (XYMenuWidth / 4) - 10, 64, 1, 1);
+            self.menuResultRect = CGRectMake(kXYMenuScreenWidth - XYMenuWidth - 10, 64, XYMenuWidth, XYMenuHeight);
+        }
+            break;
+        default:
+            break;
+    }
+    [currentNavVC.view addSubview:self.backView];
+    __weak typeof(self) weakSelf = self;
+    [self.menuView setImagesArr:imagesArr titles:titles withRect:self.menuResultRect withMenuType:menuType withItemClickBlock:^(NSInteger index) {
+        [weakSelf dimissXYMenu];
+        block(index);
+    }];
+    
+    self.menuView.frame = self.menuInitRect;
+    [self.menuView hideContentView];
+    self.menuView.alpha = 0.1;
+    [UIView animateWithDuration:0.1 animations:^{
+        self.menuView.alpha = 1.0;
+        self.menuView.frame = self.menuResultRect;
+    } completion:^(BOOL finished) {
+        [self.menuView showContentView];
+    }];
     
 }
 
@@ -91,8 +127,7 @@ static  XYMenu *menu;
 {
     [self configRectWithMenuType:menuType inView:view titles:titles];
     __weak typeof(self) weakSelf = self;
-    [self.menuView setImagesArr:imagesArr titles:titles withRect:self.menuResultRect withItemClickBlock:^(NSInteger index)
-    {
+    [self.menuView setImagesArr:imagesArr titles:titles withRect:self.menuResultRect withMenuType:menuType withItemClickBlock:^(NSInteger index) {
         [weakSelf dimissXYMenu];
         block(index);
     }];
@@ -131,7 +166,7 @@ static  XYMenu *menu;
 {
     if (!_backView) {
         _backView = [[XYMenuBackView alloc] init];
-        _backView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+        _backView.frame = CGRectMake(0, 0, kXYMenuScreenWidth, kXYMenuScreenHeight);
         _backView.userInteractionEnabled = YES;
         _backView.backgroundColor = [UIColor clearColor];
     }

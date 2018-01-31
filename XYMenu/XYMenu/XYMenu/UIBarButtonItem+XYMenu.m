@@ -10,9 +10,9 @@
 
 @implementation UIBarButtonItem (XYMenu)
 
-- (void)xy_showMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles menuType:(XYMenuType)menuType withItemClickIndex:(ItemClickIndexBlock)block
+- (void)xy_showMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles menuType:(XYMenuType)menuType currentNavVC:(UINavigationController *)currentNavVC withItemClickIndex:(ItemClickIndexBlock)block
 {
-    [XYMenu showMenuWithImages:imagesArr titles:titles inBarButtonItem:self menuType:menuType withItemClickIndex:block];
+    [XYMenu showMenuWithImages:imagesArr titles:titles menuType:menuType currentNavVC:currentNavVC withItemClickIndex:block];
 }
 
 @end

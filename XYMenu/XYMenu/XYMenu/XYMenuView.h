@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYMenu.h"
 
 typedef void(^ItemClickBlock)(NSInteger index);
 
 @interface XYMenuView : UIView
-- (void)setImagesArr:(NSArray *)imagesArr titles:(NSArray *)titles withRect:(CGRect)rect withItemClickBlock:(ItemClickBlock)block;
+- (void)setImagesArr:(NSArray *)imagesArr titles:(NSArray *)titles withRect:(CGRect)rect withMenuType:(XYMenuType)menuType withItemClickBlock:(ItemClickBlock)block;
 
 - (void)showContentView;
 

@@ -95,8 +95,8 @@
     
     NSArray *imageArr = @[@"swap", @"selected", @"code"];
     NSArray *titleArr = @[@"扫一扫", @"拍    照", @"付款码"];
-    [item xy_showMenuWithImages:imageArr titles:titleArr menuType:XYMenuRightNavBar withItemClickIndex:^(NSInteger index) {
-        [self showMessage:index];
+    [item xy_showMenuWithImages:imageArr titles:titleArr menuType:XYMenuRightNavBar currentNavVC:self.navigationController withItemClickIndex:^(NSInteger index) {
+        
     }];
 }
 
@@ -105,8 +105,9 @@
     
     NSArray *imageArr = @[@"swap", @"selected", @"code"];
     NSArray *titleArr = @[@"扫一扫", @"拍    照", @"付款码"];
-    [item xy_showMenuWithImages:imageArr titles:titleArr menuType:XYMenuLeftNavBar withItemClickIndex:^(NSInteger index) {
-        [self showMessage:index];
+
+    [item xy_showMenuWithImages:imageArr titles:titleArr menuType:XYMenuLeftNavBar currentNavVC:self.navigationController withItemClickIndex:^(NSInteger index) {
+        
     }];
 }
 

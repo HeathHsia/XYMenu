@@ -11,6 +11,12 @@
 
 @interface XYMenuBackView () <UIGestureRecognizerDelegate>
 
+@property (nonatomic, strong) XYMenuView *menuView;
+@property (nonatomic, assign) XYMenuType menuType;
+@property (nonatomic, assign) CGRect menuInitRect;
+@property (nonatomic, assign) CGRect menuResultRect;
+@property (nonatomic, assign) BOOL isDismiss;
+
 @end
 
 @implementation XYMenuBackView
@@ -35,13 +41,10 @@
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
-    
     if (![XYMenu isInMenuViewWithPoint:point]) {
         [XYMenu dismissMenu];
     }
-    
     return [super hitTest:point withEvent:event];
-    
 }
 
 

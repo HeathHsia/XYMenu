@@ -27,7 +27,7 @@ typedef void(^ItemClickIndexBlock)(NSInteger index);
 
 + (void)showMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles inView:(UIView *)view menuType:(XYMenuType)menuType withItemClickIndex:(ItemClickIndexBlock)block;
 
-+ (void)showMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles inBarButtonItem:(UIBarButtonItem *)barButtonItem menuType:(XYMenuType)menuType withItemClickIndex:(ItemClickIndexBlock)block;
++ (void)showMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles menuType:(XYMenuType)menuType currentNavVC:(UINavigationController *)currentNavVC withItemClickIndex:(ItemClickIndexBlock)block;
 
 + (void)dismissMenu;
 
