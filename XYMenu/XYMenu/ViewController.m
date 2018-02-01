@@ -11,6 +11,7 @@
 #import "UIBarButtonItem+XYMenu.h"
 
 @interface ViewController () <UIGestureRecognizerDelegate>
+
 @property (strong, nonatomic) IBOutlet UIButton *clickButton;
 
 @property (nonatomic, strong) UIView *contentV;
@@ -53,7 +54,6 @@
     }
 }
 
-
 - (void)showAlertMessage:(NSString *)message
 {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
@@ -63,36 +63,27 @@
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
-
 - (void)showMenu:(UIView *)sender menuType:(XYMenuType)type
 {
     NSArray *imageArr = @[@"swap", @"selected", @"code"];
     NSArray *titleArr = @[@"扫一扫", @"拍    照", @"付款码"];
-    
     [XYMenu showMenuWithImages:imageArr titles:titleArr inView:sender menuType:type withItemClickIndex:^(NSInteger index) {
         [self showMessage:index];
     }];
 }
 
-- (IBAction)titleButton:(id)sender {
-    
-    NSLog(@"button title");
-}
-
-
 - (IBAction)alertLeftMenu:(id)sender {
-    
-    [self showMenu:(UIView *)sender menuType:XYMenuNormal];
-    
+    [self showMenu:(UIView *)sender menuType:XYMenuLeftNormal];
 }
-
-- (IBAction)alertMenu:(id)sender {
-    [self showMenu:(UIView *)sender menuType:XYMenuNormal];
+- (IBAction)alertMidMenu:(id)sender {
+    [self showMenu:(UIView *)sender menuType:XYMenuMidNormal];
+}
+- (IBAction)alertRightMenu:(id)sender {
+    [self showMenu:(UIView *)sender menuType:XYMenuRightNormal];
 }
 
 - (IBAction)rigthtBarItem:(id)sender {
     UIBarButtonItem *item = (UIBarButtonItem *)sender;
-    
     NSArray *imageArr = @[@"swap", @"selected", @"code"];
     NSArray *titleArr = @[@"扫一扫", @"拍    照", @"付款码"];
     [item xy_showMenuWithImages:imageArr titles:titleArr menuType:XYMenuRightNavBar currentNavVC:self.navigationController withItemClickIndex:^(NSInteger index) {

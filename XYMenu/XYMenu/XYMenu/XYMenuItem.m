@@ -20,19 +20,27 @@
 
 @implementation XYMenuItem
 
-- (instancetype)initWithFrame:(CGRect)frame withIconName:(NSString *)iconName title:(NSString *)title
+- (instancetype)initWithIconName:(NSString *)iconName title:(NSString *)title
 {
-    if (self = [super initWithFrame:frame]) {
+    if (self = [super init]) {
         self.backgroundColor = [UIColor clearColor];
         _iconName = iconName;
         _title = title;
-        [self setUpViews];
     }
     return self;
 }
 
-- (void)setUpViews
+- (instancetype)init
 {
+    if (self = [super init]) {
+        
+    }
+    return self;
+}
+
+- (void)setUpViewsWithRect:(CGRect)rect
+{
+    self.frame = rect;
     CGFloat kItemHeight = self.bounds.size.height;
     CGFloat iconHeight = kItemHeight / 3;
     [self addSubview:self.iconImage];

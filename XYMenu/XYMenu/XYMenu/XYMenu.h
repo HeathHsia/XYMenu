@@ -13,13 +13,9 @@
 typedef enum : NSUInteger {
     XYMenuLeftNavBar,
     XYMenuRightNavBar,
-    XYMenuNormal,
-    XYMenuLeftTopNormal,
-    XYMenuMidTopNormal,
-    XYMenuRightTopNormal,
-    XYMenuLeftDownNormal,
-    XYMenuMidDownNormal,
-    XYmenuRightDownNormal,
+    XYMenuLeftNormal,
+    XYMenuMidNormal,
+    XYMenuRightNormal,
 } XYMenuType;
 
 typedef void(^ItemClickIndexBlock)(NSInteger index);
@@ -53,7 +49,6 @@ typedef void(^ItemClickIndexBlock)(NSInteger index);
 
 /**
  隐藏菜单
-
  @param view 当前的View
  */
 + (void)dismissMenuInView:(UIView *)view;

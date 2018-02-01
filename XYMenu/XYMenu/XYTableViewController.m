@@ -31,7 +31,6 @@
 }
 
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -41,21 +40,20 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"XYCell" forIndexPath:indexPath];
-    
     return cell;
 }
 
 
 - (IBAction)leftCellMenu:(id)sender {
     
-    [self showMenu:(UIView *)sender];
+    [self showMenu:(UIView *)sender menuType:XYMenuLeftNormal];
 }
 - (IBAction)midCellMenu:(id)sender {
-    [self showMenu:(UIView *)sender];
+    [self showMenu:(UIView *)sender menuType:XYMenuMidNormal];
 }
 
 - (IBAction)rightCellMenu:(id)sender {
-    [self showMenu:(UIView *)sender];
+    [self showMenu:(UIView *)sender menuType:XYMenuRightNormal];
 }
 
 - (void)showAlertMessage:(NSString *)message
@@ -68,12 +66,13 @@
 }
 
 
-- (void)showMenu:(UIView *)sender
+- (void)showMenu:(UIView *)sender menuType:(XYMenuType)menuType
 {
+    
     NSArray *imageArr = @[@"swap", @"selected", @"code"];
     NSArray *titleArr = @[@"扫一扫", @"拍    照", @"付款码"];
     
-    [XYMenu showMenuWithImages:imageArr titles:titleArr inView:sender menuType:XYMenuNormal withItemClickIndex:^(NSInteger index) {
+    [XYMenu showMenuWithImages:imageArr titles:titleArr inView:sender menuType:menuType withItemClickIndex:^(NSInteger index) {
         switch (index) {
             case 1:
             {

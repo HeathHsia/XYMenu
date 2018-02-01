@@ -21,7 +21,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="ny4-Za-hRa" kind="relationship" relationship="viewControllers" id="MK4-pz-xwC"/>
-                        <segue destination="z8u-qI-6mX" kind="relationship" relationship="viewControllers" id="YoU-8A-fgQ"/>
+                        <segue destination="reD-8I-ASP" kind="relationship" relationship="viewControllers" id="Ed0-Bq-PKm"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D74-wH-IcK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -58,7 +58,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Left"/>
                                 <connections>
-                                    <action selector="alertLeftMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zAS-yU-d1m"/>
+                                    <action selector="alertLeftMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zXu-RQ-k61"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F0c-dr-4bs">
@@ -66,7 +66,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Mid"/>
                                 <connections>
-                                    <action selector="alertMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Swu-fm-YCb"/>
+                                    <action selector="alertMidMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9SE-Et-xPR"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yyq-fq-qKc">
@@ -74,7 +74,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Left"/>
                                 <connections>
-                                    <action selector="alertLeftMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3PF-5N-9jT"/>
+                                    <action selector="alertLeftMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KRg-Je-tbt"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hs-9j-5CH">
@@ -82,7 +82,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="Left"/>
                                 <connections>
-                                    <action selector="alertLeftMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OSD-zk-4Up"/>
+                                    <action selector="alertLeftMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A47-1B-bx0"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="66v-9H-kKE">
@@ -90,7 +90,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Mid"/>
                                 <connections>
-                                    <action selector="alertMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sTD-4O-WIF"/>
+                                    <action selector="alertMidMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ljq-vP-BPV"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahV-VC-nMD">
@@ -98,7 +98,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Right"/>
                                 <connections>
-                                    <action selector="alertMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="abQ-JH-gE2"/>
+                                    <action selector="alertRightMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rqu-l1-5nM"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D2w-ed-c7T">
@@ -106,7 +106,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="Mid"/>
                                 <connections>
-                                    <action selector="alertMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fm9-a9-xie"/>
+                                    <action selector="alertMidMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3ia-oO-2uO"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fma-Pb-WOK">
@@ -114,7 +114,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="Right"/>
                                 <connections>
-                                    <action selector="alertMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yzu-by-md7"/>
+                                    <action selector="alertRightMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6pV-Z1-cjk"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="26U-Jg-wWj">
@@ -122,7 +122,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Right"/>
                                 <connections>
-                                    <action selector="alertMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iPE-TB-E87"/>
+                                    <action selector="alertRightMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="u5c-EF-wLy"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -199,28 +199,12 @@
                             <outlet property="delegate" destination="reD-8I-ASP" id="Ad7-IU-VDX"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" title="Cell" id="OMs-aN-gCg"/>
                     <navigationItem key="navigationItem" title="Root View Controller" id="vs3-8E-JdR"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QaK-99-m0q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-210" y="673"/>
-        </scene>
-        <!--次页-->
-        <scene sceneID="zE1-hb-rj2">
-            <objects>
-                <navigationController id="z8u-qI-6mX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="次页" id="4EP-G5-Cur"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Cme-PW-FNd">
-                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="reD-8I-ASP" kind="relationship" relationship="rootViewController" id="Wys-Rt-3Jj"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="61T-tX-o2c" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1014" y="673"/>
         </scene>
     </scenes>
 </document>

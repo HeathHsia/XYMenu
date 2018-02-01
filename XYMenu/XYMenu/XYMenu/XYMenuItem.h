@@ -10,6 +10,8 @@
 
 @interface XYMenuItem : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame withIconName:(NSString *)iconName title:(NSString *)title;
+- (instancetype)initWithIconName:(NSString *)iconName title:(NSString *)title;
+
+- (void)setUpViewsWithRect:(CGRect)rect;
 
 @end
