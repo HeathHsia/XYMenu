@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class XYMenuBackView;
 @class XYMenuView;
 
 typedef enum : NSUInteger {
@@ -23,14 +24,39 @@ typedef enum : NSUInteger {
 
 typedef void(^ItemClickIndexBlock)(NSInteger index);
 
-@interface XYMenu : NSObject
+@interface XYMenu : UIView
 
+
+
+/**
+ 展示菜单到View
+
+ @param imagesArr 图片
+ @param titles 标题
+ @param view 作用的View
+ @param menuType 菜单类型
+ @param block 回调Block
+ */
 + (void)showMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles inView:(UIView *)view menuType:(XYMenuType)menuType withItemClickIndex:(ItemClickIndexBlock)block;
 
+/**
+ 展示菜单到当前的navigationVC
+
+ @param imagesArr 图片
+ @param titles 标题
+ @param menuType 菜单类型
+ @param currentNavVC 展示当前的navigationVC
+ @param block 回调block
+ */
 + (void)showMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles menuType:(XYMenuType)menuType currentNavVC:(UINavigationController *)currentNavVC withItemClickIndex:(ItemClickIndexBlock)block;
 
-+ (void)dismissMenu;
 
-+ (BOOL)isInMenuViewWithPoint:(CGPoint)point;
+/**
+ 隐藏菜单
+
+ @param view 当前的View
+ */
++ (void)dismissMenuInView:(UIView *)view;
+
 
 @end

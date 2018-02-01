@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		146CFEB82021D8C4000AC86C /* UIView+XYMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 146CFEB72021D8C4000AC86C /* UIView+XYMenu.m */; };
 		149B7834201C5BB80014D37A /* XYMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 149B782D201C5BB80014D37A /* XYMenu.m */; };
-		149B7835201C5BB80014D37A /* XYMenuBackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 149B782F201C5BB80014D37A /* XYMenuBackView.m */; };
 		149B7836201C5BB80014D37A /* XYMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 149B7831201C5BB80014D37A /* XYMenuItem.m */; };
 		149B7837201C5BB80014D37A /* XYMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 149B7833201C5BB80014D37A /* XYMenuView.m */; };
 		149B783D201C80960014D37A /* XYTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 149B783C201C80960014D37A /* XYTableViewController.m */; };
@@ -41,10 +41,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		146CFEB62021D8C4000AC86C /* UIView+XYMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+XYMenu.h"; sourceTree = "<group>"; };
+		146CFEB72021D8C4000AC86C /* UIView+XYMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+XYMenu.m"; sourceTree = "<group>"; };
 		149B782C201C5BB80014D37A /* XYMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMenu.h; sourceTree = "<group>"; };
 		149B782D201C5BB80014D37A /* XYMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMenu.m; sourceTree = "<group>"; };
-		149B782E201C5BB80014D37A /* XYMenuBackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMenuBackView.h; sourceTree = "<group>"; };
-		149B782F201C5BB80014D37A /* XYMenuBackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMenuBackView.m; sourceTree = "<group>"; };
 		149B7830201C5BB80014D37A /* XYMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMenuItem.h; sourceTree = "<group>"; };
 		149B7831201C5BB80014D37A /* XYMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMenuItem.m; sourceTree = "<group>"; };
 		149B7832201C5BB80014D37A /* XYMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMenuView.h; sourceTree = "<group>"; };
@@ -101,14 +101,14 @@
 			children = (
 				149B782C201C5BB80014D37A /* XYMenu.h */,
 				149B782D201C5BB80014D37A /* XYMenu.m */,
-				149B782E201C5BB80014D37A /* XYMenuBackView.h */,
-				149B782F201C5BB80014D37A /* XYMenuBackView.m */,
 				149B7830201C5BB80014D37A /* XYMenuItem.h */,
 				149B7831201C5BB80014D37A /* XYMenuItem.m */,
 				149B7832201C5BB80014D37A /* XYMenuView.h */,
 				149B7833201C5BB80014D37A /* XYMenuView.m */,
 				149B783E201F26430014D37A /* UIBarButtonItem+XYMenu.h */,
 				149B783F201F26430014D37A /* UIBarButtonItem+XYMenu.m */,
+				146CFEB62021D8C4000AC86C /* UIView+XYMenu.h */,
+				146CFEB72021D8C4000AC86C /* UIView+XYMenu.m */,
 			);
 			path = XYMenu;
 			sourceTree = "<group>";
@@ -303,6 +303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				146CFEB82021D8C4000AC86C /* UIView+XYMenu.m in Sources */,
 				14E6DDA3201098A400995B6D /* ViewController.m in Sources */,
 				149B7840201F26430014D37A /* UIBarButtonItem+XYMenu.m in Sources */,
 				149B7834201C5BB80014D37A /* XYMenu.m in Sources */,
@@ -310,7 +311,6 @@
 				149B7837201C5BB80014D37A /* XYMenuView.m in Sources */,
 				149B7836201C5BB80014D37A /* XYMenuItem.m in Sources */,
 				14E6DDAE201098A400995B6D /* main.m in Sources */,
-				149B7835201C5BB80014D37A /* XYMenuBackView.m in Sources */,
 				14E6DDA0201098A400995B6D /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

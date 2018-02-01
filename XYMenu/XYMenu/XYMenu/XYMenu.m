@@ -8,7 +8,6 @@
 
 #import "XYMenu.h"
 #import "XYMenuView.h"
-#import "XYMenuBackView.h"
 
 #define kXYMenuScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kXYMenuScreenHeight [UIScreen mainScreen].bounds.size.height
@@ -16,11 +15,9 @@
 static const CGFloat XYMenuWidth = 120; // Menu宽度
 static const CGFloat XYMenuItemHeight = 60; // item高度
 
-static  XYMenu *menu;
 
-@interface XYMenu ()
+@interface XYMenu () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) XYMenuBackView *backView;
 @property (nonatomic, strong) XYMenuView *menuView;
 @property (nonatomic, assign) XYMenuType menuType;
 @property (nonatomic, assign) CGRect menuInitRect;
@@ -32,40 +29,89 @@ static  XYMenu *menu;
 @implementation XYMenu
 
 // 还是需要一个全局的静态变量
-+ (instancetype)shareMenu
-{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        menu = [[XYMenu alloc] init];
-    });
-    return menu;
-}
 
 - (instancetype)init
 {
     if (self = [super init]) {
         _isDismiss = NO;
         _menuType = XYMenuNormal;
-        [self.backView addSubview:self.menuView];
+        // 添加pan手势, 防止视图响应scrollview的滚动手势
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
+        pan.delegate = self;
+        [self addGestureRecognizer:pan];
+        self.frame = CGRectMake(0, 0, kXYMenuScreenWidth, kXYMenuScreenHeight);
+        self.userInteractionEnabled = YES;
+        self.backgroundColor = [UIColor clearColor];
+        [self addSubview:self.menuView];
     }
     return self;
+}
+
+- (void)panAction:(UIPanGestureRecognizer *)pan
+{
+    if ([pan.view isEqual:self]) {
+        return ;
+    }
+}
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    if (![self isInMenuViewWithPoint:point]) {
+        [XYMenu dismissMenuInView:self.superview];
+    }
+    return [super hitTest:point withEvent:event];
+}
+
+- (BOOL)isInMenuViewWithPoint:(CGPoint)point
+{
+    NSArray *subViews = self.subviews;
+    for (UIView *subView in subViews) {
+        if ([subView isKindOfClass:[XYMenuView class]]) {
+            XYMenuView *menuView = (XYMenuView *)subView;
+            CGPoint menuVPoint = [self convertPoint:point toView:menuView];
+            BOOL isInMenu = [menuView pointInside:menuVPoint withEvent:nil];
+            return isInMenu;
+        }
+    }
+    return NO;
 }
 
 #pragma mark --- 展示菜单
 + (void)showMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles inView:(UIView *)view menuType:(XYMenuType)menuType withItemClickIndex:(ItemClickIndexBlock)block
 {
-    [[self shareMenu] showMenuWithImages:imagesArr titles:titles inView:view menuType:menuType withItemClickIndex:block];
+    XYMenu *xy_menu = [[XYMenu alloc] init];
+    [xy_menu showMenuWithImages:imagesArr titles:titles inView:view menuType:menuType withItemClickIndex:block];
 }
 
 + (void)showMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles menuType:(XYMenuType)menuType currentNavVC:(UINavigationController *)currentNavVC withItemClickIndex:(ItemClickIndexBlock)block
 {
-    [[self shareMenu] showMenuWithImages:imagesArr titles:titles menuType:menuType currentNavVC:currentNavVC withItemClickIndex:block];
+    
+    XYMenu *xy_menu = [[XYMenu alloc] init];
+    [xy_menu showMenuWithImages:imagesArr titles:titles menuType:menuType currentNavVC:currentNavVC withItemClickIndex:block];
+    
 }
 
 #pragma mark --- 隐藏菜单
-+ (void)dismissMenu
+
++ (void)dismissMenuInView:(UIView *)view
 {
-    [[XYMenu shareMenu] dimissXYMenu];
+    XYMenu *menu = [XYMenu XYMenuInView:view];
+    if (menu) {
+        [menu dimissXYMenu];
+    }
+}
+
++ (XYMenu *)XYMenuInView:(UIView *)view
+{
+    UIView *rootView = [XYMenu rootViewFromSubView:view];
+    NSArray *subViews = rootView.subviews;
+    for (UIView *view in subViews) {
+        if ([view isKindOfClass:[XYMenu class]]) {
+            XYMenu *menu = (XYMenu *)view;
+            return menu;
+        }
+    }
+    return nil;
 }
 
 - (void)dimissXYMenu
@@ -79,7 +125,7 @@ static  XYMenu *menu;
         self.menuView.alpha = 0.1;
     } completion:^(BOOL finished) {
         _isDismiss = NO;
-        [self.backView removeFromSuperview];
+        [self removeFromSuperview];
     }];
 }
 
@@ -104,7 +150,7 @@ static  XYMenu *menu;
         default:
             break;
     }
-    [currentNavVC.view addSubview:self.backView];
+    [currentNavVC.view addSubview:self];
     __weak typeof(self) weakSelf = self;
     [self.menuView setImagesArr:imagesArr titles:titles withRect:self.menuResultRect withMenuType:menuType withItemClickBlock:^(NSInteger index) {
         [weakSelf dimissXYMenu];
@@ -147,31 +193,20 @@ static  XYMenu *menu;
 {
     _menuType = menuType;
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
-    UIView *vcView = [self rootViewFromSubView:view];
+    UIView *vcView = [XYMenu rootViewFromSubView:view];
     UIView *superView = view.superview;
     CGRect viewRect = view.frame;
     CGRect viewRectFromWindow = [superView convertRect:viewRect toView:keyWindow];
-    
     CGFloat midX = CGRectGetMidX(viewRectFromWindow);
     CGFloat maxX = CGRectGetMaxX(viewRectFromWindow);
     CGFloat maxY = CGRectGetMaxY(viewRectFromWindow);
     CGFloat XYMenuHeight = XYMenuItemHeight * titles.count;
     self.menuInitRect = CGRectMake(maxX, maxY, 1, 1);
     self.menuResultRect = CGRectMake(midX - (XYMenuWidth / 2), maxY + 5, XYMenuWidth, XYMenuHeight);
-    [vcView addSubview:self.backView];
+    [vcView addSubview:self];
 }
 
 #pragma mark --- LoadView
-- (XYMenuBackView *)backView
-{
-    if (!_backView) {
-        _backView = [[XYMenuBackView alloc] init];
-        _backView.frame = CGRectMake(0, 0, kXYMenuScreenWidth, kXYMenuScreenHeight);
-        _backView.userInteractionEnabled = YES;
-        _backView.backgroundColor = [UIColor clearColor];
-    }
-    return _backView;
-}
 
 - (XYMenuView *)menuView
 {
@@ -181,19 +216,8 @@ static  XYMenu *menu;
     return _menuView;
 }
 
-+ (BOOL)isInMenuViewWithPoint:(CGPoint)point
-{
-    return [[XYMenu shareMenu] isInMenuViewWithPoint:point];
-}
-
-- (BOOL)isInMenuViewWithPoint:(CGPoint)point
-{
-    CGPoint menuVPoint = [self.backView convertPoint:point toView:self.menuView];
-    return [self.menuView pointInside:menuVPoint withEvent:nil];
-}
-
 #pragma mark --- 返回当前View的控制器的view
-- (UIView *)rootViewFromSubView:(UIView *)view
++ (UIView *)rootViewFromSubView:(UIView *)view
 {
     UIViewController *vc = nil;
     UIResponder *next = view.nextResponder;

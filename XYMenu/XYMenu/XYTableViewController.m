@@ -23,7 +23,7 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    [XYMenu dismissMenu];
+    [XYMenu dismissMenuInView:self.view];
 }
 
 - (void)didReceiveMemoryWarning {

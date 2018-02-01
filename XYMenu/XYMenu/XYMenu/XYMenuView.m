@@ -79,7 +79,7 @@ static const CGFloat kTriangleHeight = 10;
     switch (_menuType) {
         case XYMenuLeftNavBar:
         {
-            triangleX = kContentWidth / 4;
+            triangleX = (kContentWidth / 4) - (kTriangleLength / 2);
         }
             break;
         case XYMenuRightNavBar:
