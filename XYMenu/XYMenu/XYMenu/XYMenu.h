@@ -22,8 +22,6 @@ typedef void(^ItemClickIndexBlock)(NSInteger index);
 
 @interface XYMenu : UIView
 
-
-
 /**
  展示菜单到View
 

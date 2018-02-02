@@ -7,8 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "XYMenu.h"
-#import "UIBarButtonItem+XYMenu.h"
+#import "UIView+XYMenu.h"
 
 @interface ViewController () <UIGestureRecognizerDelegate>
 
@@ -29,6 +28,16 @@
 {
     [super viewWillDisappear:animated];
     [XYMenu dismissMenuInView:self.view];;
+}
+
+- (IBAction)alertLeftMenu:(id)sender {
+    [self showMenu:(UIView *)sender menuType:XYMenuLeftNormal];
+}
+- (IBAction)alertMidMenu:(id)sender {
+    [self showMenu:(UIView *)sender menuType:XYMenuMidNormal];
+}
+- (IBAction)alertRightMenu:(id)sender {
+    [self showMenu:(UIView *)sender menuType:XYMenuRightNormal];
 }
 
 - (void)showMessage:(NSInteger)index
@@ -67,38 +76,13 @@
 {
     NSArray *imageArr = @[@"swap", @"selected", @"code"];
     NSArray *titleArr = @[@"扫一扫", @"拍    照", @"付款码"];
-    [XYMenu showMenuWithImages:imageArr titles:titleArr inView:sender menuType:type withItemClickIndex:^(NSInteger index) {
+    [sender xy_showMenuWithImages:imageArr titles:titleArr menuType:type withItemClickIndex:^(NSInteger index) {
         [self showMessage:index];
     }];
+   
 }
 
-- (IBAction)alertLeftMenu:(id)sender {
-    [self showMenu:(UIView *)sender menuType:XYMenuLeftNormal];
-}
-- (IBAction)alertMidMenu:(id)sender {
-    [self showMenu:(UIView *)sender menuType:XYMenuMidNormal];
-}
-- (IBAction)alertRightMenu:(id)sender {
-    [self showMenu:(UIView *)sender menuType:XYMenuRightNormal];
-}
 
-- (IBAction)rigthtBarItem:(id)sender {
-    UIBarButtonItem *item = (UIBarButtonItem *)sender;
-    NSArray *imageArr = @[@"swap", @"selected", @"code"];
-    NSArray *titleArr = @[@"扫一扫", @"拍    照", @"付款码"];
-    [item xy_showMenuWithImages:imageArr titles:titleArr menuType:XYMenuRightNavBar currentNavVC:self.navigationController withItemClickIndex:^(NSInteger index) {
-        [self showMessage:index];
-    }];
-}
-
-- (IBAction)leftBarItem:(id)sender {
-    UIBarButtonItem *item = (UIBarButtonItem *)sender;
-    NSArray *imageArr = @[@"swap", @"selected", @"code"];
-    NSArray *titleArr = @[@"扫一扫", @"拍    照", @"付款码"];
-    [item xy_showMenuWithImages:imageArr titles:titleArr menuType:XYMenuLeftNavBar currentNavVC:self.navigationController withItemClickIndex:^(NSInteger index) {
-        [self showMessage:index];
-    }];
-}
 
 
 

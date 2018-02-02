@@ -7,7 +7,7 @@
 //
 
 #import "XYTableViewController.h"
-#import "XYMenu.h"
+#import "UIView+XYMenu.h"
 
 @interface XYTableViewController ()
 
@@ -68,11 +68,9 @@
 
 - (void)showMenu:(UIView *)sender menuType:(XYMenuType)menuType
 {
-    
     NSArray *imageArr = @[@"swap", @"selected", @"code"];
     NSArray *titleArr = @[@"扫一扫", @"拍    照", @"付款码"];
-    
-    [XYMenu showMenuWithImages:imageArr titles:titleArr inView:sender menuType:menuType withItemClickIndex:^(NSInteger index) {
+    [sender xy_showMenuWithImages:imageArr titles:titleArr menuType:menuType withItemClickIndex:^(NSInteger index) {
         switch (index) {
             case 1:
             {
@@ -93,6 +91,7 @@
                 break;
         }
     }];
+
 }
 
 

@@ -30,14 +30,6 @@
     return self;
 }
 
-- (instancetype)init
-{
-    if (self = [super init]) {
-        
-    }
-    return self;
-}
-
 - (void)setUpViewsWithRect:(CGRect)rect
 {
     self.frame = rect;

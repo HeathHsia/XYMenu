@@ -46,11 +46,8 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
 }
 
 - (void)panAction:(UIPanGestureRecognizer *)pan{
-    
     if ([pan.view isKindOfClass:[XYMenu class]]) {
-        
         return ;
-        
     }
 }
 
@@ -112,23 +109,6 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
     return nil;
 }
 
-- (void)dismissXYMenu
-{
-    
-    
-    if (_isDismiss) return;
-    _isDismiss = YES;
-    [self.menuView hideContentView];
-    self.menuView.alpha = 1.0;
-    [UIView animateWithDuration:3.0 animations:^{
-        self.menuView.frame = self.menuInitRect;
-        self.menuView.alpha = 0.1;
-    } completion:^(BOOL finished) {
-        _isDismiss = NO;
-        [self removeFromSuperview];
-    }];
-}
-
 - (void)showMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles menuType:(XYMenuType)menuType currentNavVC:(UINavigationController *)currentNavVC  withItemClickIndex:(ItemClickIndexBlock)block
 {
     CGRect statusRect = [[UIApplication sharedApplication] statusBarFrame];
@@ -138,14 +118,12 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
     switch (menuType) {
         case XYMenuLeftNavBar:
         {
-            // 左侧NaviBar
             self.menuInitRect = CGRectMake(10 + (XYMenuWidth / 4), statusHeight + navigationBarHeight, 1, 1);
             self.menuResultRect = CGRectMake(10, statusHeight + navigationBarHeight, XYMenuWidth, XYMenuHeight);
         }
             break;
         case XYMenuRightNavBar:
         {
-            // 右侧NaviBar
             self.menuInitRect = CGRectMake(kXYMenuScreenWidth - (XYMenuWidth / 4) - 10, statusHeight + navigationBarHeight, 1, 1);
             self.menuResultRect = CGRectMake(kXYMenuScreenWidth - XYMenuWidth - 10, statusHeight + navigationBarHeight, XYMenuWidth, XYMenuHeight);
         }
@@ -182,6 +160,21 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
     }];
 }
 
+- (void)dismissXYMenu
+{
+    if (_isDismiss) return;
+    _isDismiss = YES;
+    [self.menuView hideContentView];
+    self.menuView.alpha = 1.0;
+    [UIView animateWithDuration:0.2 animations:^{
+        self.menuView.frame = self.menuInitRect;
+        self.menuView.alpha = 0.1;
+    } completion:^(BOOL finished) {
+        _isDismiss = NO;
+        [self removeFromSuperview];
+    }];
+}
+
 - (void)configRectWithMenuType:(XYMenuType)menuType inView:(UIView *)view titles:(NSArray *)titles
 {
     _menuType = menuType;
@@ -193,10 +186,17 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
     CGFloat maxY = CGRectGetMaxY(viewRectFromWindow);
     CGFloat minY = CGRectGetMinY(viewRectFromWindow);
     CGFloat XYMenuHeight = XYMenuItemHeight * titles.count;
-    UIScrollView *viewScrollView = [XYMenu scrollViewFromView:view];
-    if ((viewScrollView && ((maxY + XYMenuHeight + 5 - viewScrollView.contentOffset.y) > kXYMenuScreenHeight)) || (!viewScrollView && ((maxY + XYMenuHeight + 5) > kXYMenuScreenHeight))) {
+    
+    
+//    UIScrollView *viewScrollView = [XYMenu scrollViewFromView:view];
+//    if ((viewScrollView && ((maxY + XYMenuHeight + 5 - viewScrollView.contentOffset.y) > kXYMenuScreenHeight)) || (!viewScrollView && ((maxY + XYMenuHeight + 5) > kXYMenuScreenHeight))) {
+//        _isDown = NO;
+//    }
+    
+    if ((maxY + XYMenuHeight + 5) > kXYMenuScreenHeight) {
         _isDown = NO;
     }
+    
     switch (_menuType) {
         case XYMenuLeftNormal:
         {
@@ -247,8 +247,6 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
     [vcView addSubview:self];
 }
 
-#pragma mark --- LoadView
-
 - (XYMenuView *)menuView
 {
     if (!_menuView) {
@@ -257,7 +255,6 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
     return _menuView;
 }
 
-#pragma mark --- 返回当前View的控制器的view
 + (UIView *)rootViewFromSubView:(UIView *)view
 {
     UIViewController *vc = nil;

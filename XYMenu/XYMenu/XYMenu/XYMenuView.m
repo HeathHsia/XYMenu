@@ -11,26 +11,20 @@
 
 #define kXYMenuContentBackColor [UIColor colorWithWhite:0.4 alpha:1.0]
 #define kXYMenuContentLineColor [UIColor colorWithWhite:0.7 alpha:1.0]
-
 #define kItemBtnTag 1001
-
-
 static const CGFloat kTriangleHeight = 10;
 
 @interface XYMenuView()
-
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) NSArray *imagesArr;
 @property (nonatomic, strong) NSArray *titlesArr;
-@property (nonatomic, copy) ItemClickBlock itemClickBlock;
 @property (nonatomic, assign) XYMenuType menuType;
 @property (nonatomic, assign) BOOL isDown;
+@property (nonatomic, copy) ItemClickBlock itemClickBlock;
 
 @end
 
 @implementation XYMenuView
-
-#pragma mark --- 共通初始化方法
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -66,14 +60,8 @@ static const CGFloat kTriangleHeight = 10;
     return [self initWithFrame:CGRectZero];
 }
 
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-}
-
 - (void)drawRect:(CGRect)rect
 {
-    
     CGFloat kContentWidth = self.bounds.size.width;
     CGFloat kContentHeight = self.bounds.size.height;
     CGFloat kContentMidX = CGRectGetMidX(self.bounds);
@@ -221,13 +209,10 @@ static const CGFloat kTriangleHeight = 10;
         _contentView = [[UIView alloc] init];
         _contentView.userInteractionEnabled = YES;
         _contentView.backgroundColor = [UIColor clearColor];
+        _contentView.autoresizesSubviews = YES;
     }
     return _contentView;
 }
-
-
-
-
 
 @end
 
