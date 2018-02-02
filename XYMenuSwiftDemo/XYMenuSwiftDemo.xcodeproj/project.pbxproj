@@ -16,6 +16,9 @@
 		141CCCA32024440200D929B7 /* XYMenuSwiftDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141CCCA22024440200D929B7 /* XYMenuSwiftDemoUITests.swift */; };
 		141CCCB2202446AD00D929B7 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141CCCB1202446AD00D929B7 /* RootViewController.swift */; };
 		141CCCB4202446CC00D929B7 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141CCCB3202446CC00D929B7 /* TableViewController.swift */; };
+		141CCCB620244ABC00D929B7 /* XYMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141CCCB520244ABC00D929B7 /* XYMenu.swift */; };
+		141CCCB820244ACE00D929B7 /* XYMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141CCCB720244ACE00D929B7 /* XYMenuView.swift */; };
+		141CCCBA20244ADF00D929B7 /* XYMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141CCCB920244ADF00D929B7 /* XYMenuItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		141CCCA42024440200D929B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		141CCCB1202446AD00D929B7 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		141CCCB3202446CC00D929B7 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		141CCCB520244ABC00D929B7 /* XYMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XYMenu.swift; sourceTree = "<group>"; };
+		141CCCB720244ACE00D929B7 /* XYMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XYMenuView.swift; sourceTree = "<group>"; };
+		141CCCB920244ADF00D929B7 /* XYMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XYMenuItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +141,9 @@
 		141CCCB02024442500D929B7 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				141CCCB520244ABC00D929B7 /* XYMenu.swift */,
+				141CCCB720244ACE00D929B7 /* XYMenuView.swift */,
+				141CCCB920244ADF00D929B7 /* XYMenuItem.swift */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -273,10 +282,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				141CCCB620244ABC00D929B7 /* XYMenu.swift in Sources */,
 				141CCC852024440200D929B7 /* ViewController.swift in Sources */,
 				141CCC832024440200D929B7 /* AppDelegate.swift in Sources */,
 				141CCCB2202446AD00D929B7 /* RootViewController.swift in Sources */,
+				141CCCB820244ACE00D929B7 /* XYMenuView.swift in Sources */,
 				141CCCB4202446CC00D929B7 /* TableViewController.swift in Sources */,
+				141CCCBA20244ADF00D929B7 /* XYMenuItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
