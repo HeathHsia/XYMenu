@@ -16,7 +16,7 @@ static const CGFloat XYMenuWidth = 120; // Menu宽度
 static const CGFloat XYMenuItemHeight = 60; // item高度
 
 
-@interface XYMenu () <UIGestureRecognizerDelegate>
+@interface XYMenu ()
 
 @property (nonatomic, strong) XYMenuView *menuView;
 @property (nonatomic, assign) XYMenuType menuType;

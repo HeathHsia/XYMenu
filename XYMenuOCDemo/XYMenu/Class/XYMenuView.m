@@ -209,7 +209,6 @@ static const CGFloat kTriangleHeight = 10;
         _contentView = [[UIView alloc] init];
         _contentView.userInteractionEnabled = YES;
         _contentView.backgroundColor = [UIColor clearColor];
-        _contentView.autoresizesSubviews = YES;
     }
     return _contentView;
 }
