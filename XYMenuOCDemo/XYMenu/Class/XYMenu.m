@@ -86,7 +86,6 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
 }
 
 #pragma mark --- 隐藏菜单
-
 + (void)dismissMenuInView:(UIView *)view
 {
     XYMenu *menu = [XYMenu XYMenuInView:view];
@@ -152,10 +151,10 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
     [self.menuView hideContentView];
     self.menuView.alpha = 0.1;
     [UIView animateWithDuration:0.1 animations:^{
-        self.menuView.alpha = 1.0;
-        self.menuView.frame = self.menuResultRect;
+        weakSelf.menuView.alpha = 1.0;
+        weakSelf.menuView.frame = weakSelf.menuResultRect;
     } completion:^(BOOL finished) {
-        [self.menuView showContentView];
+        [weakSelf.menuView showContentView];
     }];
 }
 
@@ -165,12 +164,13 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
     _isDismiss = YES;
     [self.menuView hideContentView];
     self.menuView.alpha = 1.0;
+    __weak typeof (self) weakSelf = self;
     [UIView animateWithDuration:0.2 animations:^{
-        self.menuView.frame = self.menuInitRect;
-        self.menuView.alpha = 0.1;
+        weakSelf.menuView.frame = weakSelf.menuInitRect;
+        weakSelf.menuView.alpha = 0.1;
     } completion:^(BOOL finished) {
         _isDismiss = NO;
-        [self removeFromSuperview];
+        [weakSelf removeFromSuperview];
     }];
 }
 

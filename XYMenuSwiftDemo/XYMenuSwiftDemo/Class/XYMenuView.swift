@@ -106,11 +106,11 @@ class XYMenuView: UIView {
             itemClickBlock!(view.tag - 1000)
         }
     }
-    fileprivate func showContentView() {
+    func showContentView() {
         contentView.isHidden = false
         contentView.frame = bounds
     }
-    fileprivate func hideContentView() {
+    func hideContentView() {
         contentView.isHidden = true
     }
     

@@ -32,7 +32,6 @@ class XYMenu: UIView {
 
     lazy var menuView: XYMenuView = {
         let view = XYMenuView(frame: .zero)
-        
         return view
     }()
 
@@ -76,24 +75,37 @@ class XYMenu: UIView {
     }
     
     fileprivate func disMissXYMenu() {
-        
+        if isDismiss {
+            return
+        }
+        isDismiss = true
+        menuView.hideContentView()
+        menuView.alpha = 1.0
+        UIView.animate(withDuration: 0.2, animations: {
+            self.menuView.frame = self.menuResultRect
+            self.menuView.alpha = 1.0
+        }) { (finished) in
+            self.isDismiss = false
+            self.removeFromSuperview()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: 展示菜单
+    // MARK: 展示View菜单
     class func showMenuInView(images: Array<String>, titles: Array<String>, inView: UIView, type: XYMenuType, clickClosure: ItemClickBlock) {
         let xy_menu = XYMenu.init()
         xy_menu.showMenuInView(images: images, titles: titles, inView: inView, type: type, clickClosure: clickClosure)
     }
     
+    // MARK: 展示BarbuttonItem菜单
     class func showMenuInBarButtonItem(images: Array<String>, titles: Array<String>, inNavVC: UINavigationController, type: XYMenuType, clickClosure: ItemClickBlock) {
         let xy_menu = XYMenu.init()
         xy_menu.showMenuInBarButtonItem(images: images, titles: titles, inNavVC: inNavVC, type: type, clickClosure: clickClosure)
-        
     }
+    
     
     fileprivate func showMenuInView(images: Array<String> , titles: Array<String>, inView: UIView, type: XYMenuType, clickClosure: ItemClickBlock) {
         
@@ -107,7 +119,7 @@ class XYMenu: UIView {
     class func disMissMenu(inView: UIView) {
         let xy_menu = XYMenu.XYMenuIn(XYMenuInView: inView)
         if xy_menu != nil {
-            xy_menu!.dismissMenu()
+            xy_menu!.disMissXYMenu()
         }
     }
     
@@ -122,10 +134,6 @@ class XYMenu: UIView {
             }
         }
         return nil
-    }
-    
-    fileprivate func dismissMenu() {
-        
     }
     
     // MARK: 工具
