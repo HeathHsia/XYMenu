@@ -8,14 +8,16 @@
 
 import UIKit
 
+private let kTriangleLength = 16.0
+
+typealias ItemClickBlock = (NSInteger) -> Void
+
 class XYMenuView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-    */
-
+    
 }

@@ -34,7 +34,6 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
     if (self = [super init]) {
         _isDismiss = NO;
         _isDown = YES;
-        // 添加pan手势, 防止视图响应scrollview的滚动手势
         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
         [self addGestureRecognizer:pan];
         self.frame = CGRectMake(0, 0, kXYMenuScreenWidth, kXYMenuScreenHeight);
