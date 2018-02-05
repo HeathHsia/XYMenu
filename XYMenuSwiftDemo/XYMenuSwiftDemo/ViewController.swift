@@ -15,15 +15,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction func leftButton(_ sender: Any) {
-        print("leftButton")
+        self.showXYMenu(sender: sender, type: .XYMenuLeftNormal, isNav: false)
     }
     
     @IBAction func mid(_ sender: Any) {
-        print("midButton")
+       self.showXYMenu(sender: sender, type: .XYMenuMidNormal, isNav: false)
     }
     
     @IBAction func right(_ sender: Any) {
-        print("rightButton")
+       self.showXYMenu(sender: sender, type: .XYMenuRightNormal, isNav: false)
     }
 }
 

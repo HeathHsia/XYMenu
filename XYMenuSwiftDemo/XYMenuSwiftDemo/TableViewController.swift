@@ -16,25 +16,19 @@ class TableViewController: UITableViewController {
         
     }
 
-    
     @IBAction func left(_ sender: UIButton) {
-        print("left")
+        self.showXYMenu(sender: sender, type: .XYMenuLeftNormal, isNav: false)
     }
     
     
     @IBAction func mid(_ sender: Any) {
-        print("mid")
+        self.showXYMenu(sender: sender, type: .XYMenuMidNormal, isNav: false)
     }
-    
     
     @IBAction func right(_ sender: Any) {
-        print("right")
+        self.showXYMenu(sender: sender, type: .XYMenuRightNormal, isNav: false)
     }
-    
-    
-    
-    
-    
+   
     // MARK: TableView DataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1

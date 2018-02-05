@@ -21,7 +21,6 @@ private let kXYmenuScreenHeight = Double(UIScreen.main.bounds.size.height)
 private let XYMenuWidth: Double = 120
 private let XYMenuItemHeight: Double = 60
 
-
 class XYMenu: UIView {
     
     var menuType: XYMenuType
@@ -29,6 +28,8 @@ class XYMenu: UIView {
     var menuResultRect: CGRect
     var isDismiss: Bool
     var isDown: Bool
+    var isShow: Bool
+    
 
     lazy var menuView: XYMenuView = {
         let view = XYMenuView(frame: .zero)
@@ -38,6 +39,7 @@ class XYMenu: UIView {
     init() {
         isDismiss = false
         isDown = true
+        isShow = false
         menuType = .XYMenuMidNormal
         menuInitRect = .zero
         menuResultRect = .zero
@@ -75,14 +77,12 @@ class XYMenu: UIView {
     }
     
     fileprivate func disMissXYMenu() {
-        if isDismiss {
-            return
-        }
+        if isDismiss || isShow {return}
         isDismiss = true
         menuView.hideContentView()
         menuView.alpha = 1.0
         UIView.animate(withDuration: 0.2, animations: {
-            self.menuView.frame = self.menuResultRect
+            self.menuView.frame = self.menuInitRect
             self.menuView.alpha = 1.0
         }) { (finished) in
             self.isDismiss = false
@@ -108,26 +108,29 @@ class XYMenu: UIView {
     
     
     fileprivate func showMenuInView(images: Array<String> , titles: Array<String>, inView: UIView, type: XYMenuType, clickClosure: @escaping ItemClickBlock) {
+        if isShow {return}
         configRect(type: type, inView: inView, titles: titles)
         showAnimateMenu(images: images, titles: titles, type: type, closure: clickClosure)
     }
     
     fileprivate func showMenuInBarButtonItem(images: Array<String>, titles: Array<String>, currentNavVC: UINavigationController, type: XYMenuType, clickClosure: @escaping ItemClickBlock) {
+        if isShow {return}
         let statusRect = UIApplication.shared.statusBarFrame
         let statusHeight = Double(statusRect.size.height)
         let navigationBarHeight = Double(currentNavVC.navigationBar.bounds.size.height)
         let XYMenuHeight = XYMenuItemHeight * Double(titles.count)
+        menuType = type
         switch menuType {
         case .XYMenuLeftNavBar:
-            self.menuInitRect = CGRect(x: 10 + (XYMenuWidth / 4), y: statusHeight + navigationBarHeight, width: 1, height: 1)
-            self.menuResultRect = CGRect(x: 10, y: statusHeight + navigationBarHeight, width: XYMenuWidth, height: XYMenuHeight)
+            menuInitRect = CGRect(x: 10 + (XYMenuWidth / 4), y: statusHeight + navigationBarHeight, width: 1, height: 1)
+            menuResultRect = CGRect(x: 10, y: statusHeight + navigationBarHeight, width: XYMenuWidth, height: XYMenuHeight)
         case .XYMenuRightNavBar:
-            self.menuInitRect = CGRect(x: Double(kXYMenuScreenWidth) - 10 - (XYMenuWidth / 4), y: statusHeight + navigationBarHeight, width: 1, height: 1)
-            self.menuResultRect = CGRect(x: Double(kXYMenuScreenWidth) - 10 - XYMenuWidth, y: statusHeight + navigationBarHeight, width: XYMenuWidth, height: XYMenuHeight)
+            menuInitRect = CGRect(x: Double(kXYMenuScreenWidth) - 10 - (XYMenuWidth / 4), y: statusHeight + navigationBarHeight, width: 1, height: 1)
+            menuResultRect = CGRect(x: Double(kXYMenuScreenWidth) - 10 - XYMenuWidth, y: statusHeight + navigationBarHeight, width: XYMenuWidth, height: XYMenuHeight)
         default:
             break
         }
-        currentNavVC.view .addSubview(self)
+        currentNavVC.view.addSubview(self)
         showAnimateMenu(images: images, titles: titles, type: type, closure: clickClosure)
     }
     
@@ -137,7 +140,7 @@ class XYMenu: UIView {
         let vcView = XYMenu.rootViewFromSubView(viewSubView: inView)
         let viewSuperView = inView.superview
         let viewRect = inView.frame
-        let viewRectFromWindow = viewSuperView?.convert(viewRect, to: viewSuperView)
+        let viewRectFromWindow = viewSuperView?.convert(viewRect, to: vcView)
         let midX = Double((viewRectFromWindow?.midX)!)
         let minY = Double((viewRectFromWindow?.minY)!)
         let maxY = Double((viewRectFromWindow?.maxY)!)
@@ -146,7 +149,6 @@ class XYMenu: UIView {
         if (maxY + XYMenuHeight + 5) > kXYmenuScreenHeight {
             isDown = false
         }
-        
         switch menuType {
         case .XYMenuLeftNormal:
             if isDown {
@@ -183,8 +185,9 @@ class XYMenu: UIView {
         }
         vcView!.addSubview(self)
     }
-    
     fileprivate func showAnimateMenu(images: [String], titles: [String], type: XYMenuType, closure: @escaping ItemClickBlock) {
+        if isShow {return}
+        isShow = true
         menuView.setConfig(images: images, titles: titles, rect: menuResultRect, menuType: type, down: isDown) { [unowned self] (index) in
             self.disMissXYMenu()
             closure(index)
@@ -192,10 +195,11 @@ class XYMenu: UIView {
         menuView.frame = menuInitRect
         menuView.hideContentView()
         menuView.alpha = 0.1
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.2, animations: { [unowned self] in
             self.menuView.frame = self.menuResultRect
             self.menuView.alpha = 1.0
         }) { [unowned self] (finished) in
+            self.isShow = false
             self.menuView .showContentView()
         }
     }
@@ -223,23 +227,26 @@ class XYMenu: UIView {
     
     // MARK: 工具
     class func rootViewFromSubView(viewSubView: UIView) -> UIView? {
+        
+        
+        
         var vc: UIViewController? = nil
         var next = viewSubView.next
         while next != nil {
-            if (next?.isKind(of: UINavigationController.classForCoder()))! {
+            if next!.isKind(of: UINavigationController.classForCoder()) {
                 vc = next as? UIViewController
                 break
             }
-            next = next?.next
+            next = next!.next
         }
         if vc == nil {
             next = viewSubView.next
             while next != nil {
-                if ((next?.isKind(of: UIViewController.classForCoder()))! || (next?.isKind(of: UITableViewController.classForCoder()))!) {
+                if (next!.isKind(of: UIViewController.classForCoder()) || next!.isKind(of: UITableViewController.classForCoder())) {
                     vc = next as? UIViewController
                     break
                 }
-                next = next?.next
+                next = next!.next
             }
         }
         if vc != nil {return vc!.view}
@@ -250,12 +257,26 @@ class XYMenu: UIView {
         var scrollView: UIScrollView? = nil
         var next = viewSubView.next
         while next != nil {
-            if (next?.isKind(of: UIScrollView.classForCoder()))! {
+            if next!.isKind(of: UIScrollView.classForCoder()) {
                 scrollView = next as? UIScrollView
             }
-            next = next?.next
+            next = next!.next
         }
         return scrollView
     }
     
 }
+
+extension UIBarButtonItem {
+    
+    func xy_showXYMenu(images: [String], titles: [String], currentNavVC: UINavigationController, type: XYMenuType, closure: @escaping ItemClickBlock) {
+        XYMenu.showMenuInBarButtonItem(images: images, titles: titles, currentNavVC: currentNavVC, type: type, clickClosure: closure)
+    }
+}
+
+extension UIView {
+    func xy_showXYMenu(images: [String], titles: [String], type: XYMenuType, closure: @escaping ItemClickBlock) {
+        XYMenu.showMenuInView(images: images, titles: titles, inView: self, type: type, clickClosure: closure)
+    }
+}
+

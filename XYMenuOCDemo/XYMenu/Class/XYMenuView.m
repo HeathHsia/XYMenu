@@ -43,7 +43,6 @@ static const CGFloat kTriangleHeight = 10;
 
 - (void)setImagesArr:(NSArray *)imagesArr titles:(NSArray *)titles withRect:(CGRect)rect withMenuType:(XYMenuType)menuType isDown:(BOOL)isDown withItemClickBlock:(ItemClickBlock)block
 {
-    if (isDown) _isDown = isDown;
     _isDown = isDown;
     _menuType = menuType;
     _imagesArr = [NSArray arrayWithArray:imagesArr];

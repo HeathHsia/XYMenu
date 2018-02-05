@@ -46,7 +46,8 @@ class XYMenuView: UIView {
     }
     
     func setConfig(images: [String]!, titles: [String]!, rect: CGRect, menuType: XYMenuType, down: Bool, closure: ItemClickBlock!) {
-        if down { isDown = down }
+        
+        isDown = down
         itemClickBlock = closure
         type = menuType
         imagesArr = images
@@ -115,14 +116,17 @@ class XYMenuView: UIView {
     }
     
     fileprivate func setMenuItems(rect: CGRect) {
+        
         let subViews = contentView.subviews
         for view in subViews {
             view.removeFromSuperview()
         }
         let menuContentWidth = Double(rect.size.width)
         let menuContentHeight = Double(rect.size.height)
+        
+        
         let count = Double(titlesArr!.count)
-        let kContentItemHeight = menuContentHeight - kTriangleHeight / count
+        let kContentItemHeight = (menuContentHeight - kTriangleHeight) / count
         for i in 0 ..< Int(count)  {
             let itemBtn = UIButton(type: .custom)
             itemBtn.backgroundColor = .clear
@@ -139,7 +143,7 @@ class XYMenuView: UIView {
                     let lineLayer = CALayer()
                     lineLayer.cornerRadius = 0.5
                     lineLayer.backgroundColor = kXYMenuContentLineColor.cgColor
-                    lineLayer.frame = CGRect(x: (kContentItemHeight / 3) - 4, y: Double(i) * kContentItemHeight + kTriangleHeight - 1, width: menuContentWidth - (kContentItemHeight) * 2.0 / 3.0, height: 0.5)
+                    lineLayer.frame = CGRect(x: (kContentItemHeight / 3) - 4, y: Double(i) * kContentItemHeight + kTriangleHeight - 1, width: menuContentWidth - (kContentItemHeight) * 2.0 / 3.0 + 8, height: 0.5)
                     contentView.layer.addSublayer(lineLayer)
                 }
             }else {
@@ -149,12 +153,12 @@ class XYMenuView: UIView {
                     let lineLayer = CALayer()
                     lineLayer.cornerRadius = 0.5
                     lineLayer.backgroundColor = kXYMenuContentLineColor.cgColor
-                    lineLayer.frame = CGRect(x: (kContentItemHeight / 3) - 4, y: (Double(i) * kContentItemHeight) - 1, width: (kContentItemHeight * 2 / 3) + 8, height: 0.5)
+                    lineLayer.frame = CGRect(x: (kContentItemHeight / 3) - 4, y: (Double(i) * kContentItemHeight) - 1, width: menuContentWidth - (kContentItemHeight) * 2.0 / 3.0 + 8, height: 0.5)
                     contentView.layer.addSublayer(lineLayer)
                 }
             }
-//            let btnHighLightedImg = self.buttonHighLightedImage(imageSize: itemBtn.bounds.size)
-//            itemBtn.setImage(btnHighLightedImg, for: .highlighted)
+            let btnHighLightedImg = self.buttonHighLightedImage(imageSize: itemBtn.bounds.size)
+            itemBtn.setImage(btnHighLightedImg, for: .highlighted)
         }
     }
     

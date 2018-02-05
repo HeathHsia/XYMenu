@@ -11,7 +11,7 @@ import UIKit
 class XYMenuItem: UIView {
     
     var icon: String
-    var title: String?
+    var title: String
     
     // MARK: LazyLoad
     lazy var iconImage: UIImageView = {
@@ -21,6 +21,7 @@ class XYMenuItem: UIView {
     
     lazy var titleLab: UILabel = {
         var label = UILabel.init(frame: CGRect.zero)
+        label.text = title
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 16.0)
         label.backgroundColor = .clear
@@ -28,7 +29,7 @@ class XYMenuItem: UIView {
     }()
     
     // MARK: 初始化方法
-    init(_ iconStr: String,_ titleStr: String?) {
+    init(_ iconStr: String,_ titleStr: String) {
         icon = iconStr
         title = titleStr
         super.init(frame: CGRect.zero)
