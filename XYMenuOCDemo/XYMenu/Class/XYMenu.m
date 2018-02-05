@@ -24,6 +24,7 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
 @property (nonatomic, assign) CGRect menuResultRect;
 @property (nonatomic, assign) BOOL isDismiss;
 @property (nonatomic, assign) BOOL isDown;
+@property (nonatomic, assign) BOOL isShow;
 
 @end
 
@@ -33,6 +34,7 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
 {
     if (self = [super init]) {
         _isDismiss = NO;
+        _isShow = NO;
         _isDown = YES;
         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
         [self addGestureRecognizer:pan];
@@ -89,9 +91,7 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
 + (void)dismissMenuInView:(UIView *)view
 {
     XYMenu *menu = [XYMenu XYMenuInView:view];
-    if (menu) {
-        [menu dismissXYMenu];
-    }
+    if (menu) [menu dismissXYMenu];
 }
 
 + (XYMenu *)XYMenuInView:(UIView *)view
@@ -109,6 +109,7 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
 
 - (void)showMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles menuType:(XYMenuType)menuType currentNavVC:(UINavigationController *)currentNavVC  withItemClickIndex:(ItemClickIndexBlock)block
 {
+    if (_isShow) return;
     CGRect statusRect = [[UIApplication sharedApplication] statusBarFrame];
     CGFloat statusHeight = statusRect.size.height;
     CGFloat navigationBarHeight =  currentNavVC.navigationBar.bounds.size.height;
@@ -136,12 +137,15 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
 
 - (void)showMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles inView:(UIView *)view menuType:(XYMenuType)menuType withItemClickIndex:(ItemClickIndexBlock)block
 {
+    if (_isShow) return ;
     [self configRectWithMenuType:menuType inView:view titles:titles];
     [self showAnimateMenuWithImages:imagesArr titles:titles menuType:menuType withBlock:block];
 }
 
 - (void)showAnimateMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles menuType:(XYMenuType)menuType withBlock:(ItemClickIndexBlock)block
 {
+    if (_isShow) return;
+    _isShow = YES;
     __weak typeof(self) weakSelf = self;
     [self.menuView setImagesArr:imagesArr titles:titles withRect:self.menuResultRect withMenuType:menuType isDown:_isDown withItemClickBlock:^(NSInteger index) {
         [weakSelf dismissXYMenu];
@@ -154,13 +158,14 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
         weakSelf.menuView.alpha = 1.0;
         weakSelf.menuView.frame = weakSelf.menuResultRect;
     } completion:^(BOOL finished) {
+        weakSelf.isShow = NO;
         [weakSelf.menuView showContentView];
     }];
 }
 
 - (void)dismissXYMenu
 {
-    if (_isDismiss) return;
+    if (_isDismiss || _isShow) return;
     _isDismiss = YES;
     [self.menuView hideContentView];
     self.menuView.alpha = 1.0;
@@ -195,7 +200,6 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
     if ((maxY + XYMenuHeight + 5) > kXYMenuScreenHeight) {
         _isDown = NO;
     }
-    
     switch (_menuType) {
         case XYMenuLeftNormal:
         {

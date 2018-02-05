@@ -16,7 +16,7 @@ static const CGFloat XYMenuWidth = 120; // Menu宽度
 static const CGFloat XYMenuItemHeight = 60; // item高度
 
 
-@interface XYMenu () <UIGestureRecognizerDelegate>
+@interface XYMenu ()
 
 @property (nonatomic, strong) XYMenuView *menuView;
 @property (nonatomic, assign) XYMenuType menuType;
@@ -24,6 +24,7 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
 @property (nonatomic, assign) CGRect menuResultRect;
 @property (nonatomic, assign) BOOL isDismiss;
 @property (nonatomic, assign) BOOL isDown;
+@property (nonatomic, assign) BOOL isShow;
 
 @end
 
@@ -33,8 +34,8 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
 {
     if (self = [super init]) {
         _isDismiss = NO;
+        _isShow = NO;
         _isDown = YES;
-        // 添加pan手势, 防止视图响应scrollview的滚动手势
         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
         [self addGestureRecognizer:pan];
         self.frame = CGRectMake(0, 0, kXYMenuScreenWidth, kXYMenuScreenHeight);
@@ -87,13 +88,10 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
 }
 
 #pragma mark --- 隐藏菜单
-
 + (void)dismissMenuInView:(UIView *)view
 {
     XYMenu *menu = [XYMenu XYMenuInView:view];
-    if (menu) {
-        [menu dismissXYMenu];
-    }
+    if (menu) [menu dismissXYMenu];
 }
 
 + (XYMenu *)XYMenuInView:(UIView *)view
@@ -111,6 +109,7 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
 
 - (void)showMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles menuType:(XYMenuType)menuType currentNavVC:(UINavigationController *)currentNavVC  withItemClickIndex:(ItemClickIndexBlock)block
 {
+    if (_isShow) return;
     CGRect statusRect = [[UIApplication sharedApplication] statusBarFrame];
     CGFloat statusHeight = statusRect.size.height;
     CGFloat navigationBarHeight =  currentNavVC.navigationBar.bounds.size.height;
@@ -138,12 +137,15 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
 
 - (void)showMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles inView:(UIView *)view menuType:(XYMenuType)menuType withItemClickIndex:(ItemClickIndexBlock)block
 {
+    if (_isShow) return ;
     [self configRectWithMenuType:menuType inView:view titles:titles];
     [self showAnimateMenuWithImages:imagesArr titles:titles menuType:menuType withBlock:block];
 }
 
 - (void)showAnimateMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles menuType:(XYMenuType)menuType withBlock:(ItemClickIndexBlock)block
 {
+    if (_isShow) return;
+    _isShow = YES;
     __weak typeof(self) weakSelf = self;
     [self.menuView setImagesArr:imagesArr titles:titles withRect:self.menuResultRect withMenuType:menuType isDown:_isDown withItemClickBlock:^(NSInteger index) {
         [weakSelf dismissXYMenu];
@@ -153,25 +155,27 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
     [self.menuView hideContentView];
     self.menuView.alpha = 0.1;
     [UIView animateWithDuration:0.1 animations:^{
-        self.menuView.alpha = 1.0;
-        self.menuView.frame = self.menuResultRect;
+        weakSelf.menuView.alpha = 1.0;
+        weakSelf.menuView.frame = weakSelf.menuResultRect;
     } completion:^(BOOL finished) {
-        [self.menuView showContentView];
+        weakSelf.isShow = NO;
+        [weakSelf.menuView showContentView];
     }];
 }
 
 - (void)dismissXYMenu
 {
-    if (_isDismiss) return;
+    if (_isDismiss || _isShow) return;
     _isDismiss = YES;
     [self.menuView hideContentView];
     self.menuView.alpha = 1.0;
+    __weak typeof (self) weakSelf = self;
     [UIView animateWithDuration:0.2 animations:^{
-        self.menuView.frame = self.menuInitRect;
-        self.menuView.alpha = 0.1;
+        weakSelf.menuView.frame = weakSelf.menuInitRect;
+        weakSelf.menuView.alpha = 0.1;
     } completion:^(BOOL finished) {
         _isDismiss = NO;
-        [self removeFromSuperview];
+        [weakSelf removeFromSuperview];
     }];
 }
 
@@ -196,7 +200,6 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
     if ((maxY + XYMenuHeight + 5) > kXYMenuScreenHeight) {
         _isDown = NO;
     }
-    
     switch (_menuType) {
         case XYMenuLeftNormal:
         {
