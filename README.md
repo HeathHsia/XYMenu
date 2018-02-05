@@ -6,7 +6,9 @@
 
 自动监测菜单是否超出屏幕(若超出则向上弹出菜单)
 
-若使用中发现问题请提出Issue或heathhsia@gmail.com联系我 
+若发现问题或者有新的需求想法
+
+请提出Issue或heathhsia@gmail.com
 
 客观慢用 O(∩_∩)O谢谢!
 
@@ -21,7 +23,7 @@
 	````
 	@interface UIView (XYMenu)
 	/**
-	 View Show XYMenu
+	 UIView Show XYMenu
  	 @param imagesArr 图片
  	 @param titles 标题
 	 @param menuType 菜单类型 (XYMenuLeftNormal,XYMenuMidNormal,XYMenuRightNormal)
@@ -37,7 +39,7 @@
 	````
 	@interface UIBarButtonItem (XYMenu)
 	/**
-	 NavBarItem Show XYMenu
+	 UIBarButtonItem Show XYMenu
  	 @param imagesArr 图片
 	 @param titles 标题
 	 @param menuType 菜单类型(XYMenuLeftNavBar,XYMenuRightNavBar)
@@ -53,10 +55,10 @@
 	 
 	 ```
 	/**
-	 NavBarItem Show XYMenu
- 	 @param imagesArr 图片
+	 UIView Show XYMenu
+ 	 @param images 图片
 	 @param titles 标题
-	 @param menuType 菜单类型 (XYMenuLeftNormal,XYMenuMidNormal,XYMenuRightNormal)
+	 @param type 菜单类型 (XYMenuLeftNormal,XYMenuMidNormal,XYMenuRightNormal)
  	 @param closure 回调closure 
  	        index   item索引
  	*/
@@ -67,10 +69,10 @@
  
 	```
 	/**
-	 NavBarItem Show XYMenu
- 	 @param imagesArr 图片
+	 UIBarButtonItem Show XYMenu
+ 	 @param images 图片
 	 @param titles 标题
-	 @param menuType 菜单类型(XYMenuLeftNavBar,XYMenuRightNavBar)
+	 @param type 菜单类型(XYMenuLeftNavBar,XYMenuRightNavBar)
  	 @param currentNavVC BarButoonItem的当前NavVC
  	 @param closure 回调closure 
  	        index   item索引
