@@ -16,8 +16,8 @@ enum XYMenuType {
     case XYMenuRightNormal
 }
 
-private let kXYMenuScreenWidth = UIScreen.main.bounds.size.width
-private let kXYmenuScreenHeight = UIScreen.main.bounds.size.height
+private let kXYMenuScreenWidth = Double(UIScreen.main.bounds.size.width)
+private let kXYmenuScreenHeight = Double(UIScreen.main.bounds.size.height)
 private let XYMenuWidth: Double = 120
 private let XYMenuItemHeight: Double = 60
 
@@ -95,24 +95,109 @@ class XYMenu: UIView {
     }
 
     // MARK: 展示View菜单
-    class func showMenuInView(images: Array<String>, titles: Array<String>, inView: UIView, type: XYMenuType, clickClosure: ItemClickBlock) {
+    class func showMenuInView(images: Array<String>, titles: Array<String>, inView: UIView, type: XYMenuType, clickClosure: @escaping ItemClickBlock) {
         let xy_menu = XYMenu.init()
         xy_menu.showMenuInView(images: images, titles: titles, inView: inView, type: type, clickClosure: clickClosure)
     }
     
     // MARK: 展示BarbuttonItem菜单
-    class func showMenuInBarButtonItem(images: Array<String>, titles: Array<String>, inNavVC: UINavigationController, type: XYMenuType, clickClosure: ItemClickBlock) {
+    class func showMenuInBarButtonItem(images: Array<String>, titles: Array<String>, currentNavVC: UINavigationController, type: XYMenuType, clickClosure: @escaping ItemClickBlock) {
         let xy_menu = XYMenu.init()
-        xy_menu.showMenuInBarButtonItem(images: images, titles: titles, inNavVC: inNavVC, type: type, clickClosure: clickClosure)
+        xy_menu.showMenuInBarButtonItem(images: images, titles: titles, currentNavVC: currentNavVC, type: type, clickClosure: clickClosure)
     }
     
     
-    fileprivate func showMenuInView(images: Array<String> , titles: Array<String>, inView: UIView, type: XYMenuType, clickClosure: ItemClickBlock) {
-        
+    fileprivate func showMenuInView(images: Array<String> , titles: Array<String>, inView: UIView, type: XYMenuType, clickClosure: @escaping ItemClickBlock) {
+        configRect(type: type, inView: inView, titles: titles)
+        showAnimateMenu(images: images, titles: titles, type: type, closure: clickClosure)
     }
     
-    fileprivate func showMenuInBarButtonItem(images: Array<String>, titles: Array<String>, inNavVC: UINavigationController, type: XYMenuType, clickClosure: ItemClickBlock) {
+    fileprivate func showMenuInBarButtonItem(images: Array<String>, titles: Array<String>, currentNavVC: UINavigationController, type: XYMenuType, clickClosure: @escaping ItemClickBlock) {
+        let statusRect = UIApplication.shared.statusBarFrame
+        let statusHeight = Double(statusRect.size.height)
+        let navigationBarHeight = Double(currentNavVC.navigationBar.bounds.size.height)
+        let XYMenuHeight = XYMenuItemHeight * Double(titles.count)
+        switch menuType {
+        case .XYMenuLeftNavBar:
+            self.menuInitRect = CGRect(x: 10 + (XYMenuWidth / 4), y: statusHeight + navigationBarHeight, width: 1, height: 1)
+            self.menuResultRect = CGRect(x: 10, y: statusHeight + navigationBarHeight, width: XYMenuWidth, height: XYMenuHeight)
+        case .XYMenuRightNavBar:
+            self.menuInitRect = CGRect(x: Double(kXYMenuScreenWidth) - 10 - (XYMenuWidth / 4), y: statusHeight + navigationBarHeight, width: 1, height: 1)
+            self.menuResultRect = CGRect(x: Double(kXYMenuScreenWidth) - 10 - XYMenuWidth, y: statusHeight + navigationBarHeight, width: XYMenuWidth, height: XYMenuHeight)
+        default:
+            break
+        }
+        currentNavVC.view .addSubview(self)
+        showAnimateMenu(images: images, titles: titles, type: type, closure: clickClosure)
+    }
+    
+    fileprivate func configRect(type: XYMenuType, inView: UIView, titles: [String])
+    {
+        menuType = type
+        let vcView = XYMenu.rootViewFromSubView(viewSubView: inView)
+        let viewSuperView = inView.superview
+        let viewRect = inView.frame
+        let viewRectFromWindow = viewSuperView?.convert(viewRect, to: viewSuperView)
+        let midX = Double((viewRectFromWindow?.midX)!)
+        let minY = Double((viewRectFromWindow?.minY)!)
+        let maxY = Double((viewRectFromWindow?.maxY)!)
+        let XYMenuHeight = XYMenuItemHeight * Double(titles.count)
         
+        if (maxY + XYMenuHeight + 5) > kXYmenuScreenHeight {
+            isDown = false
+        }
+        
+        switch menuType {
+        case .XYMenuLeftNormal:
+            if isDown {
+                menuInitRect = CGRect(x: midX, y: maxY, width: 1, height: 1)
+                menuResultRect = CGRect(x: midX - (XYMenuWidth / 4), y: maxY + 5, width: XYMenuWidth, height: XYMenuHeight)
+            }else {
+                menuInitRect = CGRect(x: midX, y: minY, width: 1, height: 1)
+                menuResultRect = CGRect(x: midX - (XYMenuWidth / 4), y: minY - 5 - XYMenuHeight, width: XYMenuWidth, height: XYMenuHeight)
+            }
+        case .XYMenuMidNormal:
+            if isDown {
+                menuInitRect = CGRect(x: midX, y: maxY, width: 1, height: 1)
+                menuResultRect = CGRect(x: midX - (XYMenuWidth / 2), y: maxY + 5, width: XYMenuWidth, height: XYMenuHeight)
+            }else {
+                menuInitRect = CGRect(x: midX, y: minY, width: 1, height: 1)
+                menuResultRect = CGRect(x: midX - (XYMenuWidth / 2), y: minY - 5 - XYMenuHeight, width: XYMenuWidth, height: XYMenuHeight)
+            }
+        case .XYMenuRightNormal:
+            if isDown {
+                menuInitRect = CGRect(x: midX, y: maxY, width: 1, height: 1)
+                menuResultRect = CGRect(x: midX - (XYMenuWidth * 3 / 4), y: maxY + 5, width: XYMenuWidth, height: XYMenuHeight)
+            }else {
+                menuInitRect = CGRect(x: midX, y: minY, width: 1, height: 1)
+                menuResultRect = CGRect(x: midX - (XYMenuWidth * 3 / 4), y: minY - 5 - XYMenuHeight, width: XYMenuWidth, height: XYMenuHeight)
+            }
+        default:
+            if isDown {
+                menuInitRect = CGRect(x: midX, y: maxY, width: 1, height: 1)
+                menuResultRect = CGRect(x: midX - (XYMenuWidth / 2), y: maxY + 5, width: XYMenuWidth, height: XYMenuHeight)
+            }else {
+                menuInitRect = CGRect(x: midX, y: minY, width: 1, height: 1)
+                menuResultRect = CGRect(x: midX - (XYMenuWidth / 2), y: minY - 5 - XYMenuHeight, width: XYMenuWidth, height: XYMenuHeight)
+            }
+        }
+        vcView!.addSubview(self)
+    }
+    
+    fileprivate func showAnimateMenu(images: [String], titles: [String], type: XYMenuType, closure: @escaping ItemClickBlock) {
+        menuView.setConfig(images: images, titles: titles, rect: menuResultRect, menuType: type, down: isDown) { [unowned self] (index) in
+            self.disMissXYMenu()
+            closure(index)
+        }
+        menuView.frame = menuInitRect
+        menuView.hideContentView()
+        menuView.alpha = 0.1
+        UIView.animate(withDuration: 0.2, animations: {
+            self.menuView.frame = self.menuResultRect
+            self.menuView.alpha = 1.0
+        }) { [unowned self] (finished) in
+            self.menuView .showContentView()
+        }
     }
 
     // MARK: 隐藏菜单

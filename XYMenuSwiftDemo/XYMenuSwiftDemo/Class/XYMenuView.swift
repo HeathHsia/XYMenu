@@ -45,7 +45,7 @@ class XYMenuView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    fileprivate func setConfig(images: [String]!, titles: [String]!, rect: CGRect, menuType: XYMenuType, down: Bool, closure: ItemClickBlock!) {
+    func setConfig(images: [String]!, titles: [String]!, rect: CGRect, menuType: XYMenuType, down: Bool, closure: ItemClickBlock!) {
         if down { isDown = down }
         itemClickBlock = closure
         type = menuType
@@ -153,8 +153,8 @@ class XYMenuView: UIView {
                     contentView.layer.addSublayer(lineLayer)
                 }
             }
-            let btnHighLightedImg = buttonHighLightedImage(imageSize: itemBtn.bounds.size)
-            itemBtn.setImage(btnHighLightedImg, for: .highlighted)
+//            let btnHighLightedImg = self.buttonHighLightedImage(imageSize: itemBtn.bounds.size)
+//            itemBtn.setImage(btnHighLightedImg, for: .highlighted)
         }
     }
     
