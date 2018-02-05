@@ -142,10 +142,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dDA-FZ-kOf">
-                                <rect key="frame" x="184" y="334" width="60" height="30"/>
+                                <rect key="frame" x="182" y="334" width="50" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="3j8-kZ-i3Y"/>
-                                    <constraint firstAttribute="height" constant="30" id="Q7H-rV-5Ik"/>
+                                    <constraint firstAttribute="height" constant="30" id="63J-r4-geQ"/>
+                                    <constraint firstAttribute="width" constant="50" id="Mcw-ak-lGm"/>
                                 </constraints>
                                 <state key="normal" title="cell"/>
                                 <connections>
@@ -157,8 +157,8 @@
                         <constraints>
                             <constraint firstItem="eLe-Km-9HJ" firstAttribute="centerX" secondItem="XKn-ca-i22" secondAttribute="centerX" id="WFg-Vx-Czt"/>
                             <constraint firstItem="eLe-Km-9HJ" firstAttribute="top" secondItem="Fwo-En-ndj" secondAttribute="top" constant="120" id="faF-Bp-1Mu"/>
-                            <constraint firstItem="dDA-FZ-kOf" firstAttribute="top" secondItem="eLe-Km-9HJ" secondAttribute="bottom" constant="120" id="t5J-Pb-CjY"/>
-                            <constraint firstItem="dDA-FZ-kOf" firstAttribute="centerX" secondItem="XKn-ca-i22" secondAttribute="centerX" constant="7" id="xIy-r3-HJO"/>
+                            <constraint firstItem="dDA-FZ-kOf" firstAttribute="top" secondItem="eLe-Km-9HJ" secondAttribute="bottom" constant="120" id="mxc-vG-Bi0"/>
+                            <constraint firstItem="dDA-FZ-kOf" firstAttribute="centerX" secondItem="XKn-ca-i22" secondAttribute="centerX" id="n02-DJ-jgN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Fwo-En-ndj"/>
                     </view>
