@@ -130,6 +130,8 @@ class XYMenuView: UIView {
         for i in 0 ..< Int(count)  {
             let itemBtn = UIButton(type: .custom)
             itemBtn.backgroundColor = .clear
+            itemBtn.layer.cornerRadius = 5.0
+            itemBtn.layer.masksToBounds = true
             itemBtn.tag = kItemBtnTag + i
             itemBtn.addTarget(self, action: #selector(btnAction(_:)), for: .touchUpInside)
             contentView.addSubview(itemBtn)

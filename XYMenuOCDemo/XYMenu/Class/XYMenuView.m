@@ -158,6 +158,8 @@ static const CGFloat kTriangleHeight = 10;
     for (int i = 0; i < count; i++) {
         UIButton *itemBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         itemBtn.backgroundColor = [UIColor clearColor];
+        itemBtn.layer.cornerRadius = 5;
+        itemBtn.layer.masksToBounds = YES;
         itemBtn.tag = kItemBtnTag + i;
         [itemBtn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:itemBtn];
