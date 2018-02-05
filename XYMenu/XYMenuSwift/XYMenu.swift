@@ -268,7 +268,6 @@ class XYMenu: UIView {
 }
 
 extension UIBarButtonItem {
-    
     func xy_showXYMenu(images: [String], titles: [String], currentNavVC: UINavigationController, type: XYMenuType, closure: @escaping ItemClickBlock) {
         XYMenu.showMenuInBarButtonItem(images: images, titles: titles, currentNavVC: currentNavVC, type: type, clickClosure: closure)
     }

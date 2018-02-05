@@ -1,6 +1,6 @@
 # XYMenu
 
-简易集成弹出菜单
+简易集成弹出菜单 OC&&Swift
 
 三种显示方式(Left, Mid, Right)
 
@@ -13,7 +13,7 @@
 ![demo.gif](img/demo.gif)
 
 ## OC
-1. 将XYMenu文件夹拖入工程中
+1. 将XYMenu/XYMenuOC文件夹拖入工程中
 2. UIView调用菜单 
 
 	引用 ```UIView+XYMenu.h```头文件
@@ -24,7 +24,7 @@
 	 View Show XYMenu
  	 @param imagesArr 图片
  	 @param titles 标题
-	 @param menuType 菜单类型	( XYMenuLeftNormal,XYMenuMidNormal,XYMenuRightNormal)
+	 @param menuType 菜单类型 (XYMenuLeftNormal,XYMenuMidNormal,XYMenuRightNormal)
 	 @param block 回调Block
  	*/
  	- (void)xy_showMenuWithImages:(NSArray *)imagesArr titles:(NSArray *)titles menuType:(XYMenuType)menuType withItemClickIndex:(ItemClickIndexBlock)block
@@ -48,10 +48,38 @@
 	````
 
 ## Swift
-后续补上 >_<
+1. 将XYMenu/XYMenuSwift文件夹拖入工程中
+2. UIView调用菜单
+	 
+	 ```
+	/**
+	 NavBarItem Show XYMenu
+ 	 @param imagesArr 图片
+	 @param titles 标题
+	 @param menuType 菜单类型 (XYMenuLeftNormal,XYMenuMidNormal,XYMenuRightNormal)
+ 	 @param closure 回调closure 
+ 	        index   item索引
+ 	*/
+	sender.xy_showXYMenu(images: images, titles: titles, type: type, closure: { (index) in })
+	```
+	
+3. UIBarButtonItem调用菜单
+ 
+	```
+	/**
+	 NavBarItem Show XYMenu
+ 	 @param imagesArr 图片
+	 @param titles 标题
+	 @param menuType 菜单类型(XYMenuLeftNavBar,XYMenuRightNavBar)
+ 	 @param currentNavVC BarButoonItem的当前NavVC
+ 	 @param closure 回调closure 
+ 	        index   item索引
+ 	*/
+	barButtonItem.xy_showXYMenu(images: images, titles: titles, currentNavVC: self.navigationController!, type: type, closure: { (index) in })
+	```
 
 ## 版本记录
-1.0.1 --- 实现UIView UIBarButtonItem弹出菜单
+1.0.1 --- 实现UIView UIBarButtonItem弹出菜单(OC&&Swift)
 	 
 
 	
