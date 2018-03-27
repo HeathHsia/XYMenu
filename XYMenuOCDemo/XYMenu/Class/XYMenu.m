@@ -15,7 +15,6 @@
 static const CGFloat XYMenuWidth = 120; // Menu宽度
 static const CGFloat XYMenuItemHeight = 60; // item高度
 
-
 @interface XYMenu ()
 
 @property (nonatomic, strong) XYMenuView *menuView;
@@ -154,7 +153,7 @@ static const CGFloat XYMenuItemHeight = 60; // item高度
     self.menuView.frame = self.menuInitRect;
     [self.menuView hideContentView];
     self.menuView.alpha = 0.1;
-    [UIView animateWithDuration:0.1 animations:^{
+    [UIView animateWithDuration:0.2 animations:^{
         weakSelf.menuView.alpha = 1.0;
         weakSelf.menuView.frame = weakSelf.menuResultRect;
     } completion:^(BOOL finished) {
