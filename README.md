@@ -15,7 +15,7 @@
 ![demo.gif](img/demo.gif)
 
 ## OC
-1. 将XYMenu/XYMenuOC文件夹拖入工程中
+1. 将XYMenu/XYMenuOC引入工程
 2. UIView调用菜单 
 
 	引用 ```UIView+XYMenu.h```头文件
@@ -50,7 +50,7 @@
 	````
 
 ## Swift
-1. 将XYMenu/XYMenuSwift文件夹拖入工程中
+1. 将XYMenu/XYMenuSwift引入工程
 2. UIView调用菜单
 	 
 	 ```
