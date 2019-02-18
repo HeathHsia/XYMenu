@@ -10,8 +10,6 @@
 
 请提出Issue或heathhsia@gmail.com
 
-客观慢用 O(∩_∩)O谢谢!
-
 ![demo.gif](img/demo.gif)
 
 ## OC
